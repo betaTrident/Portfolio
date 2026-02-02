@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Moon, Sun } from 'lucide-react';
+import { useTheme } from './ThemeProvider';
 
 const navItems = [
   { name: 'Home', href: '#' },
@@ -13,6 +14,7 @@ const navItems = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,7 +39,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/90 shadow-lg backdrop-blur-md dark:bg-slate-900/90'
+          ? 'bg-white/80 shadow-sm backdrop-blur-md dark:bg-slate-950/80'
           : 'bg-transparent'
       }`}
     >
@@ -49,13 +51,13 @@ export default function Navbar() {
               e.preventDefault();
               scrollToSection('#');
             }}
-            className="text-2xl font-bold bg-linear-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
+            className="text-2xl font-bold text-slate-900 dark:text-white"
           >
-            JD
+            KB
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center md:gap-8">
+          <div className="hidden items-center gap-8 md:flex">
             {navItems.map((item) => (
               <a
                 key={item.name}
@@ -64,30 +66,50 @@ export default function Navbar() {
                   e.preventDefault();
                   scrollToSection(item.href);
                 }}
-                className="text-slate-700 transition-colors hover:text-purple-600 dark:text-slate-300 dark:hover:text-purple-400"
+                className="text-slate-700 transition-colors hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
               >
                 {item.name}
               </a>
             ))}
-            <button className="rounded-full bg-linear-to-r from-purple-600 to-pink-600 px-6 py-2 text-white transition-all hover:shadow-lg hover:shadow-purple-500/50">
-              Resume
+            <button
+              onClick={toggleTheme}
+              className="rounded-full p-2 text-slate-700 transition-all hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+              aria-label="Toggle theme"
+            >
+              {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
             </button>
+            <a
+              href="/Colina-CV.pdf"
+              download
+              className="rounded-full bg-slate-900 px-6 py-2 text-white transition-all hover:scale-105 hover:shadow-lg dark:bg-white dark:text-slate-900"
+            >
+              Resume
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-slate-700 dark:text-slate-300"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <button
+              onClick={toggleTheme}
+              className="rounded-full p-2 text-slate-700 dark:text-slate-300"
+              aria-label="Toggle theme"
+            >
+              {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+            </button>
+            <button
+              className="text-slate-700 dark:text-slate-300"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Mobile Navigation */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white dark:bg-slate-900 shadow-lg">
+        <div className="border-t border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 md:hidden">
           <div className="space-y-1 px-6 pb-4 pt-2">
             {navItems.map((item) => (
               <a
@@ -97,14 +119,18 @@ export default function Navbar() {
                   e.preventDefault();
                   scrollToSection(item.href);
                 }}
-                className="block py-2 text-slate-700 transition-colors hover:text-purple-600 dark:text-slate-300 dark:hover:text-purple-400"
+                className="block py-2 text-slate-700 transition-colors hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
               >
                 {item.name}
               </a>
             ))}
-            <button className="mt-2 w-full rounded-full bg-linear-to-r from-purple-600 to-pink-600 px-6 py-2 text-white">
+            <a
+              href="/Colina-CV.pdf"
+              download
+              className="mt-2 block w-full rounded-full bg-slate-900 px-6 py-2 text-center text-white dark:bg-white dark:text-slate-900"
+            >
               Resume
-            </button>
+            </a>
           </div>
         </div>
       )}

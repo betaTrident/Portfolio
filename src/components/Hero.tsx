@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowDown } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Instagram, Facebook } from 'lucide-react';
 
 export default function Hero() {
   const scrollToSection = (id: string) => {
@@ -9,51 +9,66 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-linear-to-br from-slate-900 via-slate-800 to-slate-900">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 h-80 w-80 animate-blob rounded-full bg-purple-500/20 blur-3xl"></div>
-        <div className="animation-delay-2000 absolute -bottom-40 -left-40 h-80 w-80 animate-blob rounded-full bg-blue-500/20 blur-3xl"></div>
-        <div className="animation-delay-4000 absolute top-1/2 left-1/2 h-80 w-80 animate-blob rounded-full bg-pink-500/20 blur-3xl"></div>
+    <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-white dark:bg-slate-950">
+      {/* Minimalistic animated background */}
+      <div className="absolute inset-0 overflow-hidden opacity-30">
+        <div className="absolute top-1/4 left-1/4 h-96 w-96 animate-float rounded-full bg-blue-400/20 blur-3xl dark:bg-blue-600/20"></div>
+        <div className="animation-delay-2000 absolute bottom-1/4 right-1/4 h-96 w-96 animate-float rounded-full bg-purple-400/20 blur-3xl dark:bg-purple-600/20"></div>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-5xl px-6 py-32 text-center">
-        <div className="animate-fade-in-up">
-          <p className="mb-4 text-lg font-medium text-purple-400 sm:text-xl">
-            Hi, I'm
-          </p>
-          <h1 className="mb-6 bg-linear-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-5xl font-bold text-transparent sm:text-6xl md:text-7xl lg:text-8xl">
-            John Developer
-          </h1>
-          <p className="mb-8 text-xl text-gray-300 sm:text-2xl md:text-3xl">
-            Full Stack Developer & UI/UX Enthusiast
-          </p>
-          <p className="mx-auto mb-12 max-w-2xl text-base text-gray-400 sm:text-lg md:text-xl">
-            I craft beautiful, functional, and user-centric digital experiences.
-            Specializing in modern web technologies and clean code.
+      <div className="relative z-10 mx-auto max-w-4xl px-6 py-32">
+        <div className="animate-fade-in space-y-8">
+          <div className="space-y-2">
+            <p className="animate-slide-down text-sm font-medium uppercase tracking-wider text-slate-600 dark:text-slate-400">
+              Hello, I'm
+            </p>
+            <h1 className="animate-slide-up text-6xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-7xl md:text-8xl lg:text-9xl">
+              Kent Bryan
+            </h1>
+            <h1 className="animate-slide-up animation-delay-200 text-6xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-7xl md:text-8xl lg:text-9xl">
+              Colina
+            </h1>
+          </div>
+
+          <p className="animate-fade-in animation-delay-400 max-w-2xl text-xl text-slate-600 dark:text-slate-400 md:text-2xl">
+            Full Stack Developer crafting elegant digital experiences with modern technologies
           </p>
 
-          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
+          <div className="animate-fade-in animation-delay-600 flex flex-wrap items-center gap-4">
             <button
               onClick={() => scrollToSection('projects')}
-              className="group relative overflow-hidden rounded-full bg-purple-600 px-8 py-3 text-white transition-all hover:bg-purple-700 hover:shadow-lg hover:shadow-purple-500/50"
+              className="group relative overflow-hidden rounded-full bg-slate-900 px-8 py-3 font-medium text-white transition-all hover:scale-105 hover:shadow-xl dark:bg-white dark:text-slate-900"
             >
-              <span className="relative z-10">View My Work</span>
-              <div className="absolute inset-0 z-0 bg-linear-to-r from-purple-600 to-pink-600 opacity-0 transition-opacity group-hover:opacity-100"></div>
+              View Work
             </button>
             <button
               onClick={() => scrollToSection('contact')}
-              className="rounded-full border-2 border-white/20 px-8 py-3 text-white backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/10"
+              className="rounded-full border-2 border-slate-900 px-8 py-3 font-medium text-slate-900 transition-all hover:bg-slate-900 hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-slate-900"
             >
               Get In Touch
             </button>
           </div>
+
+          <div className="animate-fade-in animation-delay-800 flex gap-4">
+            <a href="https://www.linkedin.com/in/kent-colina/" target="_blank" rel="noopener noreferrer" className="text-slate-600 transition-all hover:scale-110 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white" aria-label="LinkedIn">
+              <Linkedin size={24} />
+            </a>
+            <a href="https://github.com/betaTrident" target="_blank" rel="noopener noreferrer" className="text-slate-600 transition-all hover:scale-110 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white" aria-label="GitHub">
+              <Github size={24} />
+            </a>
+            <a href="https://www.instagram.com/kiboooooy/" target="_blank" rel="noopener noreferrer" className="text-slate-600 transition-all hover:scale-110 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white" aria-label="Instagram">
+              <Instagram size={24} />
+            </a>
+            <a href="https://www.facebook.com/kbcolina10" target="_blank" rel="noopener noreferrer" className="text-slate-600 transition-all hover:scale-110 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white" aria-label="Facebook">
+              <Facebook size={24} />
+            </a>
+          </div>
         </div>
 
-        <div className="mt-16 animate-bounce">
+        <div className="mt-20 animate-bounce-slow">
           <button
             onClick={() => scrollToSection('about')}
-            className="text-gray-400 transition-colors hover:text-white"
+            className="text-slate-400 transition-colors hover:text-slate-900 dark:hover:text-white"
             aria-label="Scroll to next section"
           >
             <ArrowDown size={32} />
