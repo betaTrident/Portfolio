@@ -60,7 +60,7 @@ export default function TechStack() {
           {techStack.map((tech, index) => (
             <div
               key={index}
-              className="group animate-fade-in relative overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-6 transition-all duration-300 hover:border-blue-500/30 hover:shadow-xl hover:shadow-blue-500/10 dark:border-slate-800 dark:from-slate-900 dark:to-slate-950"
+              className="group animate-fade-in relative overflow-hidden rounded-2xl border border-slate-200 bg-linear-to-br from-slate-50 to-white p-6 transition-all duration-300 hover:border-blue-500/30 hover:shadow-xl hover:shadow-blue-500/10 dark:border-slate-800 dark:from-slate-900 dark:to-slate-950"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Subtle gradient overlay on hover */}

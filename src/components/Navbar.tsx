@@ -14,9 +14,11 @@ const navItems = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const themeContext = useTheme();
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -30,6 +32,28 @@ export default function Navbar() {
     element?.scrollIntoView({ behavior: 'smooth' });
     setIsMobileMenuOpen(false);
   };
+
+  if (!mounted) {
+    return (
+      <nav className="fixed left-0 right-0 top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/80">
+        <div className="mx-auto flex h-12 max-w-7xl items-center justify-center px-6">
+          <div className="flex items-center gap-6">
+            {navItems.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className="text-xs font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+              >
+                {item.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      </nav>
+    );
+  }
+
+  const { theme, toggleTheme } = themeContext;
 
   return (
     <nav

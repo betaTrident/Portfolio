@@ -14,7 +14,7 @@ export default function UnderConstruction({
   showIcons = true 
 }: UnderConstructionProps) {
   return (
-    <div className="relative flex min-h-[400px] items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50/50 p-8 dark:border-slate-700 dark:bg-slate-900/50">
+    <div className="relative flex min-h-100 items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50/50 p-8 dark:border-slate-700 dark:bg-slate-900/50">
       {/* Animated background elements */}
       {showIcons && (
         <div className="absolute inset-0 overflow-hidden opacity-10 dark:opacity-5">
