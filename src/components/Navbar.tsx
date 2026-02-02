@@ -5,8 +5,8 @@ import { Menu, X, Moon, Sun } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 
 const navItems = [
-  { name: 'Home', href: '#' },
   { name: 'About', href: '#about' },
+  { name: 'Tech', href: '#tech' },
   { name: 'Projects', href: '#projects' },
   { name: 'Contact', href: '#contact' },
 ];
@@ -26,12 +26,8 @@ export default function Navbar() {
   }, []);
 
   const scrollToSection = (href: string) => {
-    if (href === '#') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      const element = document.querySelector(href);
-      element?.scrollIntoView({ behavior: 'smooth' });
-    }
+    const element = document.querySelector(href);
+    element?.scrollIntoView({ behavior: 'smooth' });
     setIsMobileMenuOpen(false);
   };
 
@@ -44,19 +40,8 @@ export default function Navbar() {
       }`}
     >
       <div className="mx-auto max-w-7xl px-6">
-        <div className="flex h-16 items-center justify-between">
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection('#');
-            }}
-            className="text-2xl font-bold text-slate-900 dark:text-white"
-          >
-            KB
-          </a>
-
-          {/* Desktop Navigation */}
+        <div className="flex h-12 items-center justify-center">
+          {/* Desktop Navigation - Centered */}
           <div className="hidden items-center gap-8 md:flex">
             {navItems.map((item) => (
               <a
@@ -66,25 +51,22 @@ export default function Navbar() {
                   e.preventDefault();
                   scrollToSection(item.href);
                 }}
-                className="text-slate-700 transition-colors hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+                className="text-xs font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
               >
                 {item.name}
               </a>
             ))}
+          </div>
+
+          {/* Right side - Theme toggle */}
+          <div className="absolute right-6 flex items-center gap-2">
             <button
               onClick={toggleTheme}
-              className="rounded-full p-2 text-slate-700 transition-all hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+              className="rounded-full p-1.5 text-slate-700 transition-all hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
               aria-label="Toggle theme"
             >
-              {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+              {theme === 'light' ? <Moon size={16} /> : <Sun size={16} />}
             </button>
-            <a
-              href="/Colina-CV.pdf"
-              download
-              className="rounded-full bg-slate-900 px-6 py-2 text-white transition-all hover:scale-105 hover:shadow-lg dark:bg-white dark:text-slate-900"
-            >
-              Resume
-            </a>
           </div>
 
           {/* Mobile Menu Button */}
