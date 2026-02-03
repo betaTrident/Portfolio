@@ -6,29 +6,37 @@ const techStack = [
   {
     name: 'Frontend Development',
     category: 'Frontend',
+    proficiency: 'Expert',
     icon: Code2,
     description: 'React, JavaScript, TypeScript, Next.js, TailwindCSS, Vite',
+    technologies: ['React', 'TypeScript', 'Next.js', 'TailwindCSS'],
     color: 'from-cyan-400 to-blue-500',
   },
   {
     name: 'Backend Development',
     category: 'Backend',
+    proficiency: 'Intermediate',
     icon: Server,
     description: 'Node.js, Python, Django, Flask, RESTful APIs',
+    technologies: ['Node.js', 'Python', 'Django', 'APIs'],
     color: 'from-green-400 to-emerald-500',
   },
   {
     name: 'Database Management',
     category: 'Database',
+    proficiency: 'Intermediate',
     icon: Database,
     description: 'PostgreSQL, MySQL, MongoDB, Supabase, Firebase',
+    technologies: ['PostgreSQL', 'MongoDB', 'Supabase', 'Firebase'],
     color: 'from-blue-400 to-indigo-500',
   },
   {
     name: 'Developer Tools',
     category: 'Tools & Workflow',
+    proficiency: 'Advanced',
     icon: Wrench,
-    description: 'Git, GitHub, VS Code, Android Studio',
+    description: 'Git, GitHub, VS Code, Android Studio, Docker basics',
+    technologies: ['Git', 'GitHub', 'VS Code', 'Docker'],
     color: 'from-purple-400 to-pink-500',
   },
 ];
@@ -56,7 +64,7 @@ export default function TechStack() {
         </div>
 
         {/* Tech Grid */}
-        <div className="grid gap-8 md:grid-cols-2">
+        <section aria-label="Technology skills and expertise" className="grid gap-8 md:grid-cols-2">
           {techStack.map((tech, index) => (
             <div
               key={index}
@@ -91,17 +99,33 @@ export default function TechStack() {
                   </div>
 
                   {/* Content */}
-                  <div className="space-y-3">
-                    <h3 className="text-2xl font-bold text-slate-900 transition-colors duration-300 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
-                      {tech.name}
-                    </h3>
+                  <div className="space-y-4">
+                    <div className="flex items-start justify-between">
+                      <h3 className="flex-1 text-2xl font-bold text-slate-900 transition-colors duration-300 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
+                        {tech.name}
+                      </h3>
+                      <span className="ml-4 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 px-3 py-1 text-xs font-bold text-white dark:from-blue-400 dark:to-blue-500">
+                        {tech.proficiency}
+                      </span>
+                    </div>
                     <p className="text-base leading-relaxed text-slate-600 dark:text-slate-400">
                       {tech.description}
                     </p>
+                    {/* Technology badges */}
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      {tech.technologies.map((techName, idx) => (
+                        <span
+                          key={idx}
+                          className="rounded-full border border-blue-200/50 bg-blue-50/50 px-3 py-1 text-xs font-medium text-blue-700 dark:border-slate-700/50 dark:bg-slate-800/50 dark:text-blue-300"
+                        >
+                          {techName}
+                        </span>
+                      ))}
+                    </div>
                   </div>
 
                   {/* Bottom accent line with dot indicator */}
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 pt-2">
                     <div className={`h-1.5 w-1.5 rounded-full bg-gradient-to-r ${tech.color} opacity-0 transition-opacity duration-500 group-hover:opacity-100`}></div>
                     <div className={`h-1 w-0 rounded-full bg-gradient-to-r ${tech.color} transition-all duration-700 group-hover:w-full`}></div>
                   </div>
@@ -109,7 +133,7 @@ export default function TechStack() {
               </div>
             </div>
           ))}
-        </div>
+        </section>
       </div>
     </section>
   );

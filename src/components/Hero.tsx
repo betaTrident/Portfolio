@@ -40,6 +40,16 @@ export default function Hero() {
         <div className="animation-delay-2000 absolute bottom-1/3 right-20 animate-float text-3xl font-bold text-slate-400/20 dark:text-slate-600/40">const</div>
       </div>
 
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 animate-bounce">
+        <div className="flex flex-col items-center gap-2">
+          <p className="text-xs font-semibold uppercase tracking-widest text-slate-600 dark:text-slate-400">Scroll down</p>
+          <svg className="h-5 w-5 text-blue-500 dark:text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </div>
+      </div>
+
       <div className="relative mx-auto grid min-h-screen max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:gap-20">
         {/* Left Content */}
         <div className="space-y-8">
@@ -52,11 +62,11 @@ export default function Hero() {
 
           {/* Main Heading */}
           <div className="animate-fade-in animation-delay-200">
-            <h1 className="text-4xl font-bold leading-tight text-slate-900 dark:text-white md:text-5xl lg:text-5xl">
+            <h1 className="text-5xl font-bold leading-[1.2] tracking-tight text-slate-900 dark:text-white md:text-6xl lg:text-6xl">
               I build{' '}
               <span className="text-blue-500 dark:text-teal-400">scalable solutions</span>{' '}
               that drive real{' '}
-              <span className="italic text-blue-500 dark:text-teal-400">business impact.</span>
+              <span className="italic text-blue-500 dark:text-teal-400">business impact</span>.
             </h1>
           </div>
 
