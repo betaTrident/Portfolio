@@ -1,26 +1,49 @@
 'use client';
 
 import { Github, Linkedin, Instagram, Facebook, Download, ArrowRight } from 'lucide-react';
+import { useEffect, useState } from 'react';
+
+interface Dot {
+  left: string;
+  top: string;
+  animation: string;
+  animationDelay: string;
+}
 
 export default function Hero() {
+  const [dots, setDots] = useState<Dot[]>([]);
+
+  useEffect(() => {
+    const generateDots = () => {
+      const newDots = Array.from({ length: 50 }, () => ({
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        animation: `float ${3 + Math.random() * 4}s ease-in-out infinite`,
+        animationDelay: `${Math.random() * 2}s`,
+      }));
+      setDots(newDots);
+    };
+    generateDots();
+  }, []);
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950">
+    <section className="relative min-h-screen overflow-hidden bg-linear-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950">
       {/* Decorative dots background */}
       <div className="absolute inset-0">
-        {[...Array(50)].map((_, i) => (
+        {dots.map((dot, i) => (
           <div
             key={i}
             className="absolute h-1 w-1 rounded-full bg-blue-500/20 dark:bg-teal-500/20"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `float ${3 + Math.random() * 4}s ease-in-out infinite`,
-              animationDelay: `${Math.random() * 2}s`,
+              left: dot.left,
+              top: dot.top,
+              animation: dot.animation,
+              animationDelay: dot.animationDelay,
             }}
           />
         ))}
@@ -128,24 +151,24 @@ export default function Hero() {
         <div className="animate-fade-in animation-delay-400 relative flex items-center justify-center lg:justify-end">
           <div className="relative">
             {/* Glow effect background */}
-            <div className="absolute inset-0 -z-10 rounded-3xl bg-gradient-to-br from-blue-500/20 via-blue-400/10 to-transparent blur-3xl dark:from-teal-500/20 dark:via-teal-400/10"></div>
+            <div className="absolute inset-0 -z-10 rounded-3xl bg-linear-to-br from-blue-500/20 via-blue-400/10 to-transparent blur-3xl dark:from-teal-500/20 dark:via-teal-400/10"></div>
             
             {/* Profile Image Container */}
-            <div className="group relative overflow-hidden rounded-3xl border border-blue-200/30 bg-gradient-to-br from-white/80 via-blue-50/20 to-slate-50/50 p-2 shadow-2xl shadow-blue-500/5 backdrop-blur-sm transition-all duration-500 hover:border-blue-300/50 hover:shadow-3xl hover:shadow-blue-500/10 dark:border-teal-500/20 dark:from-slate-900/50 dark:via-slate-900/30 dark:to-slate-800/40 dark:shadow-teal-500/10 dark:hover:border-teal-500/40 dark:hover:shadow-teal-500/20">
+            <div className="group relative overflow-hidden rounded-3xl border border-blue-200/30 bg-linear-to-br from-white/80 via-blue-50/20 to-slate-50/50 p-2 shadow-2xl shadow-blue-500/5 backdrop-blur-sm transition-all duration-500 hover:border-blue-300/50 hover:shadow-3xl hover:shadow-blue-500/10 dark:border-teal-500/20 dark:from-slate-900/50 dark:via-slate-900/30 dark:to-slate-800/40 dark:shadow-teal-500/10 dark:hover:border-teal-500/40 dark:hover:shadow-teal-500/20">
               {/* Animated gradient border on hover */}
-              <div className="absolute inset-0 -z-10 rounded-3xl bg-gradient-to-br from-blue-400/0 via-blue-500/20 to-blue-600/0 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100 dark:from-teal-400/0 dark:via-teal-500/20 dark:to-teal-600/0"></div>
+              <div className="absolute inset-0 -z-10 rounded-3xl bg-linear-to-br from-blue-400/0 via-blue-500/20 to-blue-600/0 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100 dark:from-teal-400/0 dark:via-teal-500/20 dark:to-teal-600/0"></div>
               
               {/* Inner accent overlay */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-500/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-teal-500/10"></div>
+              <div className="absolute inset-0 rounded-3xl bg-linear-to-br from-blue-500/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-teal-500/10"></div>
               
-              <div className="relative h-[500px] w-[380px] overflow-hidden rounded-2xl ring-1 ring-blue-100/50 shadow-lg transition-all duration-500 group-hover:ring-blue-200/80 dark:ring-teal-500/10 dark:group-hover:ring-teal-500/30">
+              <div className="relative h-125 w-95 overflow-hidden rounded-2xl ring-1 ring-blue-100/50 shadow-lg transition-all duration-500 group-hover:ring-blue-200/80 dark:ring-teal-500/10 dark:group-hover:ring-teal-500/30">
                 <img
-                  src="/colinaPortrait.jpg"
+                  src="/colinaPortrait.jpg" 
                   alt="Kent Bryan Colina"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';
-                    e.currentTarget.parentElement!.innerHTML = '<div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-blue-100 to-slate-200 dark:from-slate-700 dark:to-slate-800 text-6xl font-bold text-slate-700 dark:text-slate-300">KB</div>';
+                    e.currentTarget.parentElement!.innerHTML = '<div class="flex h-full w-full items-center justify-center bg-linear-to-br from-blue-100 to-slate-200 dark:from-slate-700 dark:to-slate-800 text-6xl font-bold text-slate-700 dark:text-slate-300">KB</div>';
                   }}
                 />
               </div>

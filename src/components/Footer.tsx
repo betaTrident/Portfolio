@@ -13,7 +13,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="border-t border-blue-100 bg-gradient-to-br from-white via-slate-50 to-blue-50 py-12 dark:border-slate-800 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950">
+    <footer className="border-t border-blue-100 bg-linear-to-br from-white via-slate-50 to-blue-50 py-12 dark:border-slate-800 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950">
       <div className="mx-auto max-w-6xl px-6">
         <div className="space-y-8">
           {/* Divider */}

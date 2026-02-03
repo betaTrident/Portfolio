@@ -2,6 +2,7 @@
 
 import { Mail, MapPin, Linkedin, Instagram, Facebook, Github, Send, AlertCircle, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
+import ScrollAnimation from './ScrollAnimation';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -88,29 +89,30 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-slate-50 py-16 md:py-24 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950">
+    <section id="contact" className="relative overflow-hidden bg-linear-to-br from-blue-50 via-white to-slate-50 py-12 md:py-20 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950">
       <div className="mx-auto max-w-6xl px-6">
         {/* Header */}
-        <div className="mb-12 text-center">
-          <div className="animate-fade-in">
+        <ScrollAnimation>
+          <div className="mb-12 text-center">
             <h2 className="mb-3 text-3xl font-bold text-slate-900 dark:text-white md:text-4xl">
               Get In Touch
             </h2>
-            <div className="mx-auto h-1 w-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-500"></div>
+            <div className="mx-auto h-1 w-12 rounded-full bg-linear-to-r from-blue-500 to-purple-500"></div>
             <p className="mt-4 text-base text-slate-600 dark:text-slate-400">
               Let's build something amazing together
             </p>
           </div>
-        </div>
+        </ScrollAnimation>
 
         <div className="grid gap-6 lg:grid-cols-2">
           {/* Left Side - Contact Info & Socials */}
-          <div className="space-y-5">
-            {/* Contact Cards */}
-            <div className="animate-fade-in animation-delay-200 space-y-4">
+          <ScrollAnimation delay={0.2}>
+            <div className="space-y-5">
+              {/* Contact Cards */}
+              <div className="space-y-4">
               <div className="group relative overflow-hidden rounded-xl border border-slate-200/60 bg-white/80 p-5 backdrop-blur-sm transition-all hover:border-blue-300 hover:shadow-lg hover:shadow-blue-100/50 dark:border-slate-800/50 dark:bg-slate-900/50 dark:hover:border-blue-500/30 dark:hover:shadow-blue-500/10">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-sm transition-transform group-hover:scale-110 dark:from-blue-500/20 dark:to-blue-600/20 dark:text-blue-400">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-linear-to-br from-blue-500 to-blue-600 text-white shadow-sm transition-transform group-hover:scale-110 dark:from-blue-500/20 dark:to-blue-600/20 dark:text-blue-400">
                     <Mail size={20} />
                   </div>
                   <div>
@@ -129,7 +131,7 @@ export default function Contact() {
 
               <div className="group relative overflow-hidden rounded-xl border border-slate-200/60 bg-white/80 p-5 backdrop-blur-sm transition-all hover:border-green-300 hover:shadow-lg hover:shadow-green-100/50 dark:border-slate-800/50 dark:bg-slate-900/50 dark:hover:border-green-500/30 dark:hover:shadow-green-500/10">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-gradient-to-br from-green-500 to-green-600 text-white shadow-sm transition-transform group-hover:scale-110 dark:from-green-500/20 dark:to-green-600/20 dark:text-green-400">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-linear-to-br from-green-500 to-green-600 text-white shadow-sm transition-transform group-hover:scale-110 dark:from-green-500/20 dark:to-green-600/20 dark:text-green-400">
                     <MapPin size={20} />
                   </div>
                   <div>
@@ -145,7 +147,7 @@ export default function Contact() {
             </div>
 
             {/* Social Links */}
-            <div className="animate-fade-in animation-delay-400 rounded-xl border border-slate-200/60 bg-white/80 p-5 backdrop-blur-sm dark:border-slate-800/50 dark:bg-slate-900/50">
+            <div className="rounded-xl border border-slate-200/60 bg-white/80 p-5 backdrop-blur-sm dark:border-slate-800/50 dark:bg-slate-900/50">
               <div className="flex gap-3">
                 {socials.map((social, index) => {
                   const Icon = social.icon;
@@ -165,12 +167,14 @@ export default function Contact() {
               </div>
             </div>
           </div>
+          </ScrollAnimation>
 
           {/* Right Side - Contact Form */}
-          <form 
-            onSubmit={handleSubmit} 
-            className="animate-fade-in animation-delay-600 rounded-xl border border-slate-200/60 bg-white/80 p-6 backdrop-blur-sm dark:border-slate-800/50 dark:bg-slate-900/50"
-          >
+          <ScrollAnimation delay={0.4}>
+            <form 
+              onSubmit={handleSubmit} 
+              className="rounded-xl border border-slate-200/60 bg-white/80 p-6 backdrop-blur-sm dark:border-slate-800/50 dark:bg-slate-900/50"
+            >
             <div className="space-y-5">
               {/* Status Messages */}
               {submitStatus === 'success' && (
@@ -273,7 +277,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="group flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-md shadow-blue-500/30 transition-all disabled:cursor-not-allowed disabled:opacity-60 hover:scale-[1.02] hover:shadow-lg hover:shadow-blue-500/40 dark:from-blue-500 dark:to-blue-600 dark:shadow-blue-500/10 dark:hover:shadow-blue-500/20"
+                className="group flex w-full items-center justify-center gap-2 rounded-lg bg-linear-to-r from-blue-600 to-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-md shadow-blue-500/30 transition-all disabled:cursor-not-allowed disabled:opacity-60 hover:scale-[1.02] hover:shadow-lg hover:shadow-blue-500/40 dark:from-blue-500 dark:to-blue-600 dark:shadow-blue-500/10 dark:hover:shadow-blue-500/20"
               >
                 {isSubmitting ? (
                   <>
@@ -289,6 +293,7 @@ export default function Contact() {
               </button>
             </div>
           </form>
+          </ScrollAnimation>
         </div>
       </div>
     </section>
