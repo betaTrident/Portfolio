@@ -1,6 +1,6 @@
 'use client';
 
-import { Mail, MapPin, Linkedin, Instagram, Facebook, Github, Send, Download, AlertCircle, CheckCircle } from 'lucide-react';
+import { Mail, MapPin, Linkedin, Instagram, Facebook, Github, Send, AlertCircle, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Contact() {
@@ -88,38 +88,38 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="bg-gradient-to-br from-blue-50 via-white to-slate-50 py-20 md:py-32 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950">
-      <div className="mx-auto max-w-7xl px-6">
+    <section id="contact" className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-slate-50 py-16 md:py-24 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950">
+      <div className="mx-auto max-w-6xl px-6">
         {/* Header */}
-        <div className="mb-16 text-center">
+        <div className="mb-12 text-center">
           <div className="animate-fade-in">
-            <h2 className="mb-4 text-4xl font-bold text-slate-900 dark:text-white md:text-5xl">
-              Let's Connect
+            <h2 className="mb-3 text-3xl font-bold text-slate-900 dark:text-white md:text-4xl">
+              Get In Touch
             </h2>
-            <div className="mx-auto h-1 w-16 bg-blue-500"></div>
-            <p className="mt-6 text-lg text-slate-600 dark:text-slate-400">
-              Have a project in mind? Let's build something amazing together.
+            <div className="mx-auto h-1 w-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-500"></div>
+            <p className="mt-4 text-base text-slate-600 dark:text-slate-400">
+              Let's build something amazing together
             </p>
           </div>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-2">
+        <div className="grid gap-6 lg:grid-cols-2">
           {/* Left Side - Contact Info & Socials */}
-          <div className="space-y-8">
+          <div className="space-y-5">
             {/* Contact Cards */}
             <div className="animate-fade-in animation-delay-200 space-y-4">
-              <div className="group rounded-2xl border border-blue-100 bg-white p-6 shadow-lg shadow-blue-100/50 transition-all hover:border-blue-300 hover:shadow-xl hover:shadow-blue-200/50 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none dark:hover:border-blue-500/50">
-                <div className="flex items-center gap-4">
-                  <div className="rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 p-3 text-white shadow-lg transition-transform group-hover:scale-110 dark:from-blue-500/10 dark:to-blue-600/10 dark:text-blue-500 dark:shadow-none">
-                    <Mail size={24} />
+              <div className="group relative overflow-hidden rounded-xl border border-slate-200/60 bg-white/80 p-5 backdrop-blur-sm transition-all hover:border-blue-300 hover:shadow-lg hover:shadow-blue-100/50 dark:border-slate-800/50 dark:bg-slate-900/50 dark:hover:border-blue-500/30 dark:hover:shadow-blue-500/10">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-sm transition-transform group-hover:scale-110 dark:from-blue-500/20 dark:to-blue-600/20 dark:text-blue-400">
+                    <Mail size={20} />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
-                      Email Address
+                    <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
+                      Email
                     </p>
                     <a
                       href="mailto:colinakb24@gmail.com"
-                      className="text-lg font-semibold text-slate-900 transition-colors hover:text-blue-600 dark:text-white dark:hover:text-blue-400"
+                      className="text-sm font-semibold text-slate-900 transition-colors hover:text-blue-600 dark:text-white dark:hover:text-blue-400"
                     >
                       colinakb24@gmail.com
                     </a>
@@ -127,17 +127,17 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className="group rounded-2xl border border-blue-100 bg-white p-6 shadow-lg shadow-blue-100/50 transition-all hover:border-blue-300 hover:shadow-xl hover:shadow-blue-200/50 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none dark:hover:border-blue-500/50">
-                <div className="flex items-center gap-4">
-                  <div className="rounded-xl bg-gradient-to-br from-green-500 to-green-600 p-3 text-white shadow-lg transition-transform group-hover:scale-110 dark:from-green-500/10 dark:to-green-600/10 dark:text-green-500 dark:shadow-none">
-                    <MapPin size={24} />
+              <div className="group relative overflow-hidden rounded-xl border border-slate-200/60 bg-white/80 p-5 backdrop-blur-sm transition-all hover:border-green-300 hover:shadow-lg hover:shadow-green-100/50 dark:border-slate-800/50 dark:bg-slate-900/50 dark:hover:border-green-500/30 dark:hover:shadow-green-500/10">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-gradient-to-br from-green-500 to-green-600 text-white shadow-sm transition-transform group-hover:scale-110 dark:from-green-500/20 dark:to-green-600/20 dark:text-green-400">
+                    <MapPin size={20} />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
-                      Based In
+                    <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
+                      Location
                     </p>
-                    <p className="text-lg font-semibold text-slate-900 dark:text-white">
-                      Mandaue City, Cebu, Philippines
+                    <p className="text-sm font-semibold text-slate-900 dark:text-white">
+                      Mandaue City, Cebu
                     </p>
                   </div>
                 </div>
@@ -145,11 +145,8 @@ export default function Contact() {
             </div>
 
             {/* Social Links */}
-            <div className="animate-fade-in animation-delay-400 rounded-2xl border border-blue-100 bg-white p-6 shadow-lg shadow-blue-100/50 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none">
-              <h3 className="mb-4 text-lg font-semibold text-slate-900 dark:text-white">
-                Connect With Me
-              </h3>
-              <div className="grid grid-cols-4 gap-3">
+            <div className="animate-fade-in animation-delay-400 rounded-xl border border-slate-200/60 bg-white/80 p-5 backdrop-blur-sm dark:border-slate-800/50 dark:bg-slate-900/50">
+              <div className="flex gap-3">
                 {socials.map((social, index) => {
                   const Icon = social.icon;
                   return (
@@ -158,35 +155,23 @@ export default function Contact() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`group flex aspect-square items-center justify-center rounded-xl border border-blue-100 bg-slate-50 text-slate-700 shadow-md shadow-blue-100/50 transition-all hover:scale-110 hover:border-transparent hover:text-white hover:shadow-lg dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:shadow-none ${social.color}`}
+                      className={`group flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200/60 bg-slate-50/80 text-slate-700 backdrop-blur-sm transition-all hover:scale-110 hover:border-transparent hover:text-white hover:shadow-md dark:border-slate-700/50 dark:bg-slate-800/50 dark:text-slate-300 ${social.color}`}
                       aria-label={social.label}
                     >
-                      <Icon size={22} />
+                      <Icon size={18} />
                     </a>
                   );
                 })}
               </div>
-            </div>
-
-            {/* Download Resume Button */}
-            <div className="animate-fade-in animation-delay-600">
-              <a
-                href="/Colina-CV.pdf"
-                download
-                className="flex w-full items-center justify-center gap-3 rounded-2xl border border-blue-500 bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-4 font-semibold text-white shadow-lg shadow-blue-500/50 transition-all hover:scale-[1.02] hover:shadow-xl hover:shadow-blue-600/50 dark:from-blue-500 dark:to-blue-600 dark:shadow-none dark:hover:shadow-blue-500/20"
-              >
-                <Download size={20} />
-                Download My Resume
-              </a>
             </div>
           </div>
 
           {/* Right Side - Contact Form */}
           <form 
             onSubmit={handleSubmit} 
-            className="animate-fade-in animation-delay-600 rounded-2xl border border-blue-100 bg-white p-8 shadow-xl shadow-blue-100/50 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none"
+            className="animate-fade-in animation-delay-600 rounded-xl border border-slate-200/60 bg-white/80 p-6 backdrop-blur-sm dark:border-slate-800/50 dark:bg-slate-900/50"
           >
-            <div className="space-y-6">
+            <div className="space-y-5">
               {/* Status Messages */}
               {submitStatus === 'success' && (
                 <div className="flex items-center gap-3 rounded-lg border border-green-200 bg-green-50 px-4 py-3 dark:border-green-900/30 dark:bg-green-500/10">
@@ -209,7 +194,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="name"
-                  className="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-300"
+                  className="mb-1.5 block text-xs font-semibold text-slate-700 dark:text-slate-300"
                 >
                   Name <span className="text-red-500">*</span>
                 </label>
@@ -220,7 +205,7 @@ export default function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   disabled={isSubmitting}
-                  className="w-full rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 text-slate-900 transition-all disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-500/10 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:focus:border-blue-500 dark:focus:bg-slate-900"
+                  className="w-full rounded-lg border border-slate-200/60 bg-slate-50/80 px-3.5 py-2.5 text-sm text-slate-900 backdrop-blur-sm transition-all disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-slate-700/50 dark:bg-slate-950/50 dark:text-white dark:focus:border-blue-500 dark:focus:bg-slate-900/80"
                   placeholder="Your Name"
                   aria-required="true"
                 />
@@ -229,9 +214,9 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="email"
-                  className="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-300"
+                  className="mb-1.5 block text-xs font-semibold text-slate-700 dark:text-slate-300"
                 >
-                  Email Address <span className="text-red-500">*</span>
+                  Email <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="email"
@@ -240,7 +225,7 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   disabled={isSubmitting}
-                  className="w-full rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 text-slate-900 transition-all disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-500/10 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:focus:border-blue-500 dark:focus:bg-slate-900"
+                  className="w-full rounded-lg border border-slate-200/60 bg-slate-50/80 px-3.5 py-2.5 text-sm text-slate-900 backdrop-blur-sm transition-all disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-slate-700/50 dark:bg-slate-950/50 dark:text-white dark:focus:border-blue-500 dark:focus:bg-slate-900/80"
                   placeholder="your.email@example.com"
                   aria-required="true"
                 />
@@ -249,7 +234,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="subject"
-                  className="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-300"
+                  className="mb-1.5 block text-xs font-semibold text-slate-700 dark:text-slate-300"
                 >
                   Subject <span className="text-slate-400 dark:text-slate-500">(Optional)</span>
                 </label>
@@ -260,7 +245,7 @@ export default function Contact() {
                   value={formData.subject}
                   onChange={handleChange}
                   disabled={isSubmitting}
-                  className="w-full rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 text-slate-900 transition-all disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-500/10 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:focus:border-blue-500 dark:focus:bg-slate-900"
+                  className="w-full rounded-lg border border-slate-200/60 bg-slate-50/80 px-3.5 py-2.5 text-sm text-slate-900 backdrop-blur-sm transition-all disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-slate-700/50 dark:bg-slate-950/50 dark:text-white dark:focus:border-blue-500 dark:focus:bg-slate-900/80"
                   placeholder="Project inquiry, collaboration, etc."
                 />
               </div>
@@ -268,9 +253,9 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="message"
-                  className="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-300"
+                  className="mb-1.5 block text-xs font-semibold text-slate-700 dark:text-slate-300"
                 >
-                  Your Message <span className="text-red-500">*</span>
+                  Message <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   id="message"
@@ -278,9 +263,9 @@ export default function Contact() {
                   value={formData.message}
                   onChange={handleChange}
                   disabled={isSubmitting}
-                  className="w-full resize-none rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 text-slate-900 transition-all disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-500/10 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:focus:border-blue-500 dark:focus:bg-slate-900"
-                  placeholder="Tell me about your project or inquiry..."
-                  rows={5}
+                  className="w-full resize-none rounded-lg border border-slate-200/60 bg-slate-50/80 px-3.5 py-2.5 text-sm text-slate-900 backdrop-blur-sm transition-all disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-slate-700/50 dark:bg-slate-950/50 dark:text-white dark:focus:border-blue-500 dark:focus:bg-slate-900/80"
+                  placeholder="Tell me about your project..."
+                  rows={4}
                   aria-required="true"
                 />
               </div>
@@ -288,7 +273,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="group flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 px-8 py-4 font-semibold text-white shadow-lg shadow-blue-500/50 transition-all disabled:cursor-not-allowed disabled:opacity-60 hover:scale-[1.02] hover:shadow-xl hover:shadow-blue-600/50 dark:from-blue-500 dark:to-blue-600 dark:shadow-none dark:hover:shadow-blue-500/20"
+                className="group flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-md shadow-blue-500/30 transition-all disabled:cursor-not-allowed disabled:opacity-60 hover:scale-[1.02] hover:shadow-lg hover:shadow-blue-500/40 dark:from-blue-500 dark:to-blue-600 dark:shadow-blue-500/10 dark:hover:shadow-blue-500/20"
               >
                 {isSubmitting ? (
                   <>
@@ -297,8 +282,8 @@ export default function Contact() {
                   </>
                 ) : (
                   <>
+                    <Send size={16} className="transition-transform group-hover:translate-x-1" />
                     Send Message
-                    <Send size={18} className="transition-transform group-hover:translate-x-1" />
                   </>
                 )}
               </button>

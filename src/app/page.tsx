@@ -1,10 +1,8 @@
 import Navbar from '@/components/Navbar';
-import Breadcrumb from '@/components/Breadcrumb';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import TechStack from '@/components/TechStack';
 import Projects from '@/components/Projects';
-import FAQ from '@/components/FAQ';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
@@ -20,13 +18,11 @@ export default function Home() {
         Skip to main content
       </a>
       <Navbar />
-      <Breadcrumb />
       <main id="main-content">
         <Hero />
         <About />
         <TechStack />
         <Projects />
-        <FAQ />
         <Contact />
       </main>
       <Footer />
