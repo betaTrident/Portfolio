@@ -35,62 +35,77 @@ const techStack = [
 
 export default function TechStack() {
   return (
-    <section id="tech" className="bg-white py-16 dark:bg-slate-950 md:py-24">
+    <section id="tech" className="bg-gradient-to-br from-slate-50 via-white to-blue-50 py-16 md:py-24 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950">
       <div className="mx-auto max-w-6xl px-6">
         {/* Header */}
-        <div className="mb-12">
+        <div className="mb-16">
           <div className="animate-fade-in">
-            <div className="mb-4 inline-flex items-center gap-2">
-              <div className="h-1.5 w-1.5 rounded-full bg-blue-500"></div>
-              <span className="text-xs font-medium uppercase tracking-wider text-blue-500">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 dark:bg-blue-500/10">
+              <div className="h-2 w-2 animate-pulse rounded-full bg-blue-500"></div>
+              <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
                 My Arsenal
               </span>
             </div>
-            <h2 className="mb-4 text-3xl font-bold text-slate-900 dark:text-white md:text-4xl">
+            <h2 className="mb-4 text-4xl font-bold text-slate-900 dark:text-white md:text-5xl">
               Technology Stack
             </h2>
-            <p className="max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-400">
+            <p className="max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-400">
               A curated selection of tools and technologies I leverage to build scalable, efficient, and modern web applications.
             </p>
           </div>
         </div>
 
         {/* Tech Grid */}
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-8 md:grid-cols-2">
           {techStack.map((tech, index) => (
             <div
               key={index}
-              className="group animate-fade-in relative overflow-hidden rounded-2xl border border-slate-200 bg-linear-to-br from-slate-50 to-white p-6 transition-all duration-300 hover:border-blue-500/30 hover:shadow-xl hover:shadow-blue-500/10 dark:border-slate-800 dark:from-slate-900 dark:to-slate-950"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="group animate-fade-in relative"
+              style={{ animationDelay: `${index * 150}ms` }}
             >
-              {/* Subtle gradient overlay on hover */}
-              <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <div className={`h-full w-full bg-linear-to-br ${tech.color} opacity-5`}></div>
-              </div>
+              {/* Glow effect on hover */}
+              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-blue-500/0 via-blue-500/20 to-blue-500/0 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100 dark:via-blue-500/30"></div>
+              
+              {/* Card */}
+              <div className="relative overflow-hidden rounded-3xl border border-blue-100/50 bg-white/80 p-8 shadow-lg shadow-blue-100/30 backdrop-blur-sm transition-all duration-500 hover:border-blue-200 hover:shadow-2xl hover:shadow-blue-200/40 dark:border-slate-800/50 dark:bg-slate-900/50 dark:shadow-slate-900/50 dark:hover:border-slate-700 dark:hover:shadow-blue-500/10">
+                {/* Animated gradient background */}
+                <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                  <div className={`h-full w-full bg-gradient-to-br ${tech.color} opacity-[0.03] dark:opacity-[0.05]`}></div>
+                </div>
 
-              <div className="relative">
-                {/* Icon and Category */}
-                <div className="mb-4 flex items-start justify-between">
-                  <div className={`flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br ${tech.color} shadow-lg transition-all duration-300 group-hover:scale-110`}>
-                    <tech.icon className="h-6 w-6 text-white" />
+                <div className="relative space-y-6">
+                  {/* Icon and Category */}
+                  <div className="flex items-start justify-between">
+                    {/* Icon with gradient background */}
+                    <div className="relative">
+                      <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${tech.color} opacity-20 blur-md transition-all duration-500 group-hover:opacity-30 group-hover:blur-lg`}></div>
+                      <div className={`relative flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${tech.color} shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:shadow-2xl`}>
+                        <tech.icon className="h-8 w-8 text-white" strokeWidth={2.5} />
+                      </div>
+                    </div>
+                    
+                    {/* Category Badge */}
+                    <span className="rounded-full border border-blue-200/50 bg-blue-50/80 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-blue-600 backdrop-blur-sm transition-all duration-300 group-hover:border-blue-300 group-hover:bg-blue-100/80 dark:border-slate-700/50 dark:bg-slate-800/50 dark:text-slate-300 dark:group-hover:border-slate-600 dark:group-hover:bg-slate-700/50">
+                      {tech.category}
+                    </span>
                   </div>
-                  <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-slate-600 dark:bg-slate-800 dark:text-slate-400">
-                    {tech.category}
-                  </span>
-                </div>
 
-                {/* Content */}
-                <div className="space-y-2">
-                  <h3 className="text-xl font-bold text-slate-900 transition-colors group-hover:text-blue-500 dark:text-white dark:group-hover:text-blue-400">
-                    {tech.name}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                    {tech.description}
-                  </p>
-                </div>
+                  {/* Content */}
+                  <div className="space-y-3">
+                    <h3 className="text-2xl font-bold text-slate-900 transition-colors duration-300 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
+                      {tech.name}
+                    </h3>
+                    <p className="text-base leading-relaxed text-slate-600 dark:text-slate-400">
+                      {tech.description}
+                    </p>
+                  </div>
 
-                {/* Bottom accent line */}
-                <div className="mt-4 h-1 w-0 rounded-full bg-linear-to-r from-blue-500 to-blue-400 transition-all duration-500 group-hover:w-full"></div>
+                  {/* Bottom accent line with dot indicator */}
+                  <div className="flex items-center gap-2">
+                    <div className={`h-1.5 w-1.5 rounded-full bg-gradient-to-r ${tech.color} opacity-0 transition-opacity duration-500 group-hover:opacity-100`}></div>
+                    <div className={`h-1 w-0 rounded-full bg-gradient-to-r ${tech.color} transition-all duration-700 group-hover:w-full`}></div>
+                  </div>
+                </div>
               </div>
             </div>
           ))}

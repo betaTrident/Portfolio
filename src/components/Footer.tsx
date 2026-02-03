@@ -13,7 +13,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="border-t border-slate-200 bg-white py-8 dark:border-slate-800 dark:bg-slate-950">
+    <footer className="border-t border-blue-100 bg-gradient-to-br from-white via-slate-50 to-blue-50 py-8 dark:border-slate-800 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950">
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col items-center justify-center gap-6 text-center">
           {/* Social Links */}
@@ -27,7 +27,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="rounded-lg p-2 text-slate-600 transition-all hover:bg-slate-100 hover:text-blue-500 dark:text-slate-400 dark:hover:bg-slate-900 dark:hover:text-blue-400"
+                  className="rounded-lg border border-blue-100 bg-white p-2 text-slate-600 shadow-md shadow-blue-100/50 transition-all hover:border-blue-300 hover:text-blue-600 hover:shadow-lg hover:shadow-blue-200/50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:shadow-none dark:hover:border-slate-700 dark:hover:text-blue-400"
                 >
                   <Icon size={20} />
                 </a>

@@ -34,7 +34,7 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="bg-white py-20 dark:bg-slate-950 md:py-32">
+    <section id="contact" className="bg-gradient-to-br from-blue-50 via-white to-slate-50 py-20 md:py-32 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950">
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
         <div className="mb-16 text-center">
@@ -54,9 +54,9 @@ export default function Contact() {
           <div className="space-y-8">
             {/* Contact Cards */}
             <div className="animate-fade-in animation-delay-200 space-y-4">
-              <div className="group rounded-2xl border border-slate-200 bg-slate-50 p-6 transition-all hover:border-blue-500/50 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900">
+              <div className="group rounded-2xl border border-blue-100 bg-white p-6 shadow-lg shadow-blue-100/50 transition-all hover:border-blue-300 hover:shadow-xl hover:shadow-blue-200/50 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none dark:hover:border-blue-500/50">
                 <div className="flex items-center gap-4">
-                  <div className="rounded-xl bg-blue-500/10 p-3 text-blue-500 transition-transform group-hover:scale-110">
+                  <div className="rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 p-3 text-white shadow-lg transition-transform group-hover:scale-110 dark:from-blue-500/10 dark:to-blue-600/10 dark:text-blue-500 dark:shadow-none">
                     <Mail size={24} />
                   </div>
                   <div>
@@ -65,7 +65,7 @@ export default function Contact() {
                     </p>
                     <a
                       href="mailto:colinakb24@gmail.com"
-                      className="text-lg font-semibold text-slate-900 transition-colors hover:text-blue-500 dark:text-white dark:hover:text-blue-400"
+                      className="text-lg font-semibold text-slate-900 transition-colors hover:text-blue-600 dark:text-white dark:hover:text-blue-400"
                     >
                       colinakb24@gmail.com
                     </a>
@@ -73,9 +73,9 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className="group rounded-2xl border border-slate-200 bg-slate-50 p-6 transition-all hover:border-blue-500/50 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900">
+              <div className="group rounded-2xl border border-blue-100 bg-white p-6 shadow-lg shadow-blue-100/50 transition-all hover:border-blue-300 hover:shadow-xl hover:shadow-blue-200/50 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none dark:hover:border-blue-500/50">
                 <div className="flex items-center gap-4">
-                  <div className="rounded-xl bg-blue-500/10 p-3 text-blue-500 transition-transform group-hover:scale-110">
+                  <div className="rounded-xl bg-gradient-to-br from-green-500 to-green-600 p-3 text-white shadow-lg transition-transform group-hover:scale-110 dark:from-green-500/10 dark:to-green-600/10 dark:text-green-500 dark:shadow-none">
                     <MapPin size={24} />
                   </div>
                   <div>
@@ -91,7 +91,7 @@ export default function Contact() {
             </div>
 
             {/* Social Links */}
-            <div className="animate-fade-in animation-delay-400 rounded-2xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-800 dark:bg-slate-900">
+            <div className="animate-fade-in animation-delay-400 rounded-2xl border border-blue-100 bg-white p-6 shadow-lg shadow-blue-100/50 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none">
               <h3 className="mb-4 text-lg font-semibold text-slate-900 dark:text-white">
                 Connect With Me
               </h3>
@@ -104,7 +104,7 @@ export default function Contact() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`group flex aspect-square items-center justify-center rounded-xl border border-slate-300 bg-white text-slate-700 transition-all hover:scale-110 hover:border-transparent hover:text-white dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 ${social.color}`}
+                      className={`group flex aspect-square items-center justify-center rounded-xl border border-blue-100 bg-slate-50 text-slate-700 shadow-md shadow-blue-100/50 transition-all hover:scale-110 hover:border-transparent hover:text-white hover:shadow-lg dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:shadow-none ${social.color}`}
                       aria-label={social.label}
                     >
                       <Icon size={22} />
@@ -119,7 +119,7 @@ export default function Contact() {
               <a
                 href="/Colina-CV.pdf"
                 download
-                className="flex w-full items-center justify-center gap-3 rounded-2xl border border-blue-500 bg-blue-500 px-6 py-4 font-semibold text-white transition-all hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-500/30"
+                className="flex w-full items-center justify-center gap-3 rounded-2xl border border-blue-500 bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-4 font-semibold text-white shadow-lg shadow-blue-500/50 transition-all hover:scale-[1.02] hover:shadow-xl hover:shadow-blue-600/50 dark:from-blue-500 dark:to-blue-600 dark:shadow-none dark:hover:shadow-blue-500/20"
               >
                 <Download size={20} />
                 Download My Resume
@@ -130,7 +130,7 @@ export default function Contact() {
           {/* Right Side - Contact Form */}
           <form 
             onSubmit={handleSubmit} 
-            className="animate-fade-in animation-delay-600 rounded-2xl border border-slate-200 bg-slate-50 p-8 dark:border-slate-800 dark:bg-slate-900"
+            className="animate-fade-in animation-delay-600 rounded-2xl border border-blue-100 bg-white p-8 shadow-xl shadow-blue-100/50 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none"
           >
             <div className="space-y-6">
               <div>
@@ -147,7 +147,7 @@ export default function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/10 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:focus:border-blue-500"
+                  className="w-full rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 text-slate-900 transition-all focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-500/10 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:focus:border-blue-500 dark:focus:bg-slate-900"
                   placeholder="Your Name"
                 />
               </div>
@@ -166,7 +166,7 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/10 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:focus:border-blue-500"
+                  className="w-full rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 text-slate-900 transition-all focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-500/10 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:focus:border-blue-500 dark:focus:bg-slate-900"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -185,14 +185,14 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full resize-none rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/10 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:focus:border-blue-500"
+                  className="w-full resize-none rounded-xl border border-blue-200 bg-slate-50 px-4 py-3 text-slate-900 transition-all focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-500/10 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:focus:border-blue-500 dark:focus:bg-slate-900"
                   placeholder="Tell me about your project..."
                 />
               </div>
 
               <button
                 type="submit"
-                className="group flex w-full items-center justify-center gap-2 rounded-xl bg-blue-500 px-8 py-4 font-semibold text-white transition-all hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-500/30"
+                className="group flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 px-8 py-4 font-semibold text-white shadow-lg shadow-blue-500/50 transition-all hover:scale-[1.02] hover:shadow-xl hover:shadow-blue-600/50 dark:from-blue-500 dark:to-blue-600 dark:shadow-none dark:hover:shadow-blue-500/20"
               >
                 Send Message
                 <Send size={18} className="transition-transform group-hover:translate-x-1" />
