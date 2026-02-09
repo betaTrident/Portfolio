@@ -2,7 +2,7 @@
 
 import { Mail, MapPin, Linkedin, Instagram, Facebook, Github, Send, AlertCircle, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
-import ScrollAnimation from './ScrollAnimation';
+import ScrollAnimation from '@/components/common/ScrollAnimation';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -90,11 +90,11 @@ export default function Contact() {
 
   return (
     <section id="contact" className="relative overflow-hidden bg-linear-to-br from-blue-50 via-white to-slate-50 py-12 md:py-20 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         {/* Header */}
         <ScrollAnimation>
-          <div className="mb-12 text-center">
-            <h2 className="mb-3 text-3xl font-bold text-slate-900 dark:text-white md:text-4xl">
+          <div className="mb-8 text-center sm:mb-12">
+            <h2 className="mb-3 text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl md:text-4xl">
               Get In Touch
             </h2>
             <div className="mx-auto h-1 w-12 rounded-full bg-linear-to-r from-blue-500 to-purple-500"></div>
@@ -104,7 +104,7 @@ export default function Contact() {
           </div>
         </ScrollAnimation>
 
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid gap-5 sm:gap-6 lg:grid-cols-2">
           {/* Left Side - Contact Info & Socials */}
           <ScrollAnimation delay={0.2}>
             <div className="space-y-5">
@@ -173,7 +173,7 @@ export default function Contact() {
           <ScrollAnimation delay={0.4}>
             <form 
               onSubmit={handleSubmit} 
-              className="rounded-xl border border-slate-200/60 bg-white/80 p-6 backdrop-blur-sm dark:border-slate-800/50 dark:bg-slate-900/50"
+              className="rounded-xl border border-slate-200/60 bg-white/80 p-4 backdrop-blur-sm sm:p-6 dark:border-slate-800/50 dark:bg-slate-900/50"
             >
             <div className="space-y-5">
               {/* Status Messages */}

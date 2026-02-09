@@ -1,11 +1,6 @@
-import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
-import About from '@/components/About';
-import TechStack from '@/components/TechStack';
-import Projects from '@/components/Projects';
-import Contact from '@/components/Contact';
-import Footer from '@/components/Footer';
-import ScrollToTop from '@/components/ScrollToTop';
+import { Navbar, Footer } from '@/components/layout';
+import { Hero, About, TechStack, Projects, Contact } from '@/components/sections';
+import { ScrollToTop } from '@/components/common';
 
 export default function Home() {
   return (

@@ -14,7 +14,7 @@ export default function UnderConstruction({
   showIcons = true 
 }: UnderConstructionProps) {
   return (
-    <div className="relative flex min-h-100 items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50/50 p-8 dark:border-slate-700 dark:bg-slate-900/50">
+    <div className="relative flex min-h-60 items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50/50 p-6 sm:min-h-100 sm:p-8 dark:border-slate-700 dark:bg-slate-900/50">
       {/* Animated background elements */}
       {showIcons && (
         <div className="absolute inset-0 overflow-hidden opacity-10 dark:opacity-5">
@@ -35,7 +35,7 @@ export default function UnderConstruction({
         </div>
 
         {/* Title */}
-        <h3 className="mb-4 text-2xl font-bold text-slate-900 dark:text-white md:text-3xl">
+        <h3 className="mb-3 text-xl font-bold text-slate-900 dark:text-white sm:mb-4 sm:text-2xl md:text-3xl">
           {title}
         </h3>
 

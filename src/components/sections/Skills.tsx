@@ -1,6 +1,6 @@
 'use client';
 
-import ScrollAnimation from './ScrollAnimation';
+import ScrollAnimation from '@/components/common/ScrollAnimation';
 
 const skillCategories = [
   {

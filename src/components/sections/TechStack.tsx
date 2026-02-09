@@ -1,7 +1,7 @@
 'use client';
 
 import { Code2, Database, Server, Cloud, Wrench, Smartphone } from 'lucide-react';
-import ScrollAnimation from './ScrollAnimation';
+import ScrollAnimation from '@/components/common/ScrollAnimation';
 
 const techStack = [
   {
@@ -33,7 +33,7 @@ const techStack = [
 export default function TechStack() {
   return (
     <section id="tech" className="bg-linear-to-br from-slate-50 via-white to-blue-50 py-12 md:py-20 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         {/* Header */}
         <ScrollAnimation>
           <div className="mb-10">
@@ -43,7 +43,7 @@ export default function TechStack() {
                 My Arsenal
               </span>
             </div>
-            <h2 className="mb-3 text-3xl font-bold text-slate-900 dark:text-white md:text-4xl">
+            <h2 className="mb-3 text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl md:text-4xl">
               Technology Stack
             </h2>
             <p className="max-w-2xl text-sm leading-relaxed text-slate-600 dark:text-slate-400">
@@ -54,7 +54,7 @@ export default function TechStack() {
 
         {/* Tech Grid */}
         <ScrollAnimation delay={0.2}>
-          <section aria-label="Technology skills and expertise" className="grid gap-5 md:grid-cols-2">
+          <section aria-label="Technology skills and expertise" className="grid gap-4 sm:gap-5 md:grid-cols-2">
             {techStack.map((tech, index) => (
               <div
                 key={index}
