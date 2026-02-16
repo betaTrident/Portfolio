@@ -79,7 +79,7 @@ export default function Hero() {
           {/* Label */}
           <div className="animate-fade-in">
             <span className="text-sm font-medium text-blue-500 dark:text-teal-400">
-              Full Stack Developer • Tech Enthusiast
+              Software Engineer • Full Stack Developer
             </span>
           </div>
 
