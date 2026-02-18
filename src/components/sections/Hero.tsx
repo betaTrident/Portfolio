@@ -180,7 +180,7 @@ export default function Hero() {
                 <div className="absolute h-3 w-3 animate-pulse rounded-full bg-blue-500 dark:bg-teal-400"></div>
                 <div className="absolute h-3 w-3 animate-ping rounded-full bg-blue-500 opacity-75 dark:bg-teal-400"></div>
               </div>
-              <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">Available for work</p>
+              <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">On-the-job training</p>
             </div>
           </div>
         </div>

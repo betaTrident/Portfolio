@@ -22,7 +22,7 @@ export default function About() {
           <ScrollAnimation delay={0.2}>
             <div className="mx-auto max-w-3xl">
               <p className="mb-6 text-base leading-[1.8] text-slate-700 dark:text-slate-300 sm:text-lg">
-                I build <span className="font-semibold text-blue-600 dark:text-blue-500">real-world projects</span> that provide <span className="font-semibold text-blue-600 dark:text-blue-500">real-world solutions</span>. My passion lies in diving deep into technology—exploring both the hardware and software side to create meaningful applications that make a difference.
+                I build <span className="font-semibold text-blue-600 dark:text-blue-500">real-world projects</span> that provide <span className="font-semibold text-blue-600 dark:text-blue-500">innovative solutions</span>. My passion lies in diving deep into technology—exploring both the hardware and software side to create meaningful applications that make a difference.
               </p>
               <p className="text-base leading-[1.8] text-slate-700 dark:text-slate-300 sm:text-lg">
                 Whether it's developing full-stack web applications or troubleshooting complex systems, I'm driven by the challenge of turning ideas into functional, impactful solutions. I believe in writing clean, maintainable code and constantly learning new technologies to stay ahead.
