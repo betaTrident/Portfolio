@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { Github, Linkedin, Instagram, Facebook, Download, ArrowRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -15,7 +15,7 @@ export default function Hero() {
 
   useEffect(() => {
     const generateDots = () => {
-      const newDots = Array.from({ length: 50 }, () => ({
+      const newDots = Array.from({ length: 25 }, () => ({
         left: `${Math.random() * 100}%`,
         top: `${Math.random() * 100}%`,
         animation: `float ${3 + Math.random() * 4}s ease-in-out infinite`,
@@ -32,7 +32,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-linear-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950">
+    <section id="hero" className="relative min-h-screen overflow-hidden bg-linear-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950">
       {/* Decorative dots background */}
       <div className="absolute inset-0">
         {dots.map((dot, i) => (
@@ -50,7 +50,7 @@ export default function Hero() {
       </div>
 
       {/* Floating code elements */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
         <div className="absolute top-20 left-10 animate-float text-4xl font-bold text-blue-400/20 dark:text-teal-500/30">&lt;/&gt;</div>
         <div className="animation-delay-2000 absolute top-40 right-20 animate-float text-3xl font-mono text-slate-400/20 dark:text-slate-600/40">{'{ }'}</div>
         <div className="animation-delay-4000 absolute bottom-32 left-1/4 animate-float text-2xl font-mono text-blue-300/20 dark:text-teal-600/30">fn()</div>
@@ -64,14 +64,18 @@ export default function Hero() {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 animate-bounce">
+      <button
+        onClick={() => scrollToSection('about')}
+        aria-label="Scroll to about section"
+        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 animate-bounce cursor-pointer bg-transparent border-none"
+      >
         <div className="flex flex-col items-center gap-2">
           <p className="text-xs font-semibold uppercase tracking-widest text-slate-600 dark:text-slate-400">Scroll down</p>
           <svg className="h-5 w-5 text-blue-500 dark:text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
         </div>
-      </div>
+      </button>
 
       <div className="relative mx-auto grid min-h-screen max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:gap-20">
         {/* Left Content */}

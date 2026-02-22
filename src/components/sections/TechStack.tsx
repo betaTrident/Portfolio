@@ -36,17 +36,12 @@ export default function TechStack() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         {/* Header */}
         <ScrollAnimation>
-          <div className="mb-10">
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1.5 dark:bg-blue-500/10">
-              <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue-500"></div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
-                My Arsenal
-              </span>
-            </div>
-            <h2 className="mb-3 text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl md:text-4xl">
+          <div className="mb-10 text-center">
+            <h2 className="mb-4 text-3xl font-bold leading-tight text-slate-900 dark:text-white sm:text-4xl md:text-5xl">
               Technology Stack
             </h2>
-            <p className="max-w-2xl text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+            <div className="mx-auto h-1.5 w-16 bg-linear-to-r from-blue-500 to-blue-600"></div>
+            <p className="mt-4 text-base text-slate-600 dark:text-slate-400 sm:text-lg">
               Tools and technologies I use to build modern web applications.
             </p>
           </div>

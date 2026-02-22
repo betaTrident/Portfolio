@@ -1,27 +1,28 @@
-import { Navbar, Footer } from '@/components/layout';
+import { Navbar } from '@/components/layout';
 import { Hero, About, TechStack, Projects, Contact } from '@/components/sections';
-import { ScrollToTop } from '@/components/common';
+import { ScrollToTop, FullPageWrapper } from '@/components/common';
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
-      {/* Skip to main content link for accessibility */}
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-blue-600 focus:px-4 focus:py-2 focus:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-      >
-        Skip to main content
-      </a>
-      <Navbar />
-      <main id="main-content">
-        <Hero />
-        <About />
-        <TechStack />
-        <Projects />
-        <Contact />
-      </main>
-      <Footer />
-      <ScrollToTop />
-    </div>
+    <FullPageWrapper>
+      <div className="min-h-screen">
+        {/* Skip to main content link for accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-blue-600 focus:px-4 focus:py-2 focus:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+        >
+          Skip to main content
+        </a>
+        <Navbar />
+        <main id="main-content">
+          <Hero />
+          <About />
+          <TechStack />
+          <Projects />
+          <Contact />
+        </main>
+        <ScrollToTop />
+      </div>
+    </FullPageWrapper>
   );
 }

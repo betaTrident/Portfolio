@@ -25,7 +25,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Kent Bryan Colina - Full Stack Developer | React, Next.js, Node.js",
+  title: "Code-K - Full Stack Developer Portfolio",
   description: "Full-stack developer specialized in React, Next.js, and modern web technologies. Building scalable solutions with clean code and best practices.",
   keywords: ["full-stack developer", "React", "Next.js", "web development", "TypeScript", "Node.js"],
   authors: [{ name: "Kent Bryan Colina" }],
@@ -73,7 +73,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
