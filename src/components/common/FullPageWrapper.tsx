@@ -41,7 +41,7 @@ export default function FullPageWrapper({
   useEffect(() => {
     setShowNav(currentSection > 0);
   }, [currentSection]);
-
+                                                
   // Scroll to section with ultra-smooth animation
   const scrollToSection = useCallback(
     (index: number) => {
@@ -100,6 +100,8 @@ export default function FullPageWrapper({
     if (!isEnabled) return;
 
     const handleWheel = (e: WheelEvent) => {
+      // Allow Ctrl+Scroll (browser zoom) to pass through
+      if (e.ctrlKey) return;
       e.preventDefault();
 
       const now = Date.now();

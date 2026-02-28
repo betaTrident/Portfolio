@@ -108,6 +108,8 @@ export default function FullPageScroll() {
     if (!isDesktop) return;
 
     const handleWheel = (e: WheelEvent) => {
+      // Allow Ctrl+Scroll (browser zoom) to pass through
+      if (e.ctrlKey) return;
       e.preventDefault();
       if (!canScroll.current) return;
 

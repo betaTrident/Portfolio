@@ -77,7 +77,7 @@ export default function Hero() {
         </div>
       </button>
 
-      <div className="relative mx-auto grid min-h-screen max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:gap-20">
+      <div className="relative mx-auto grid min-h-screen max-w-7xl items-center gap-8 px-6 py-16 lg:grid-cols-2 lg:gap-12 xl:gap-20 xl:py-20">
         {/* Left Content */}
         <div className="space-y-8">
           {/* Label */}
@@ -89,7 +89,7 @@ export default function Hero() {
 
           {/* Main Heading */}
           <div className="animate-fade-in animation-delay-200">
-            <h1 className="text-5xl font-bold leading-[1.2] tracking-tight text-slate-900 dark:text-white md:text-6xl lg:text-6xl">
+            <h1 className="text-4xl font-bold leading-[1.2] tracking-tight text-slate-900 dark:text-white md:text-5xl lg:text-4xl xl:text-6xl">
               I build{' '}
               <span className="text-blue-500 dark:text-teal-400">scalable solutions</span>{' '}
               that drive real{' '}
@@ -165,7 +165,7 @@ export default function Hero() {
               {/* Inner accent overlay */}
               <div className="absolute inset-0 rounded-3xl bg-linear-to-br from-blue-500/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-teal-500/10"></div>
               
-              <div className="relative h-125 w-95 overflow-hidden rounded-2xl ring-1 ring-blue-100/50 shadow-lg transition-all duration-500 group-hover:ring-blue-200/80 dark:ring-teal-500/10 dark:group-hover:ring-teal-500/30">
+              <div className="relative h-80 w-64 overflow-hidden rounded-2xl ring-1 ring-blue-100/50 shadow-lg transition-all duration-500 group-hover:ring-blue-200/80 lg:h-96 lg:w-72 xl:h-125 xl:w-95 dark:ring-teal-500/10 dark:group-hover:ring-teal-500/30">
                 <img
                   src="/colinaPortrait.jpg" 
                   alt="Kent Bryan Colina"
