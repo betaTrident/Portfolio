@@ -47,34 +47,38 @@ const SKILLS: Record<Category, Tech[]> = {
 
 const TABS: Category[] = ['Languages', 'Frameworks', 'Databases', 'Tools'];
 
-/* ── Single skill card (mirrors Mikhail's SkillCard) ───────────────── */
+/* ── Single skill card ───────────────────────────────────────────── */
 function SkillCard({ tech, index }: { tech: Tech; index: number }) {
   return (
     <motion.li
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.25, delay: index * 0.05 }}
-      className="group relative flex flex-col items-center justify-center gap-2 overflow-hidden rounded-2xl border border-slate-200/60 bg-white/60 p-3 text-center shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-300/60 hover:bg-white hover:shadow-lg hover:shadow-blue-200/40 dark:border-slate-700/40 dark:bg-slate-800/50 dark:hover:border-blue-500/40 dark:hover:bg-slate-800 dark:hover:shadow-blue-500/20"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.3, delay: index * 0.06 }}
+      className="group relative flex flex-col items-center justify-center gap-3 overflow-hidden rounded-xl border border-slate-200/50 bg-white/40 p-4 text-center backdrop-blur-md transition-all duration-300 hover:border-slate-300/80 hover:bg-white/70 hover:shadow-xl hover:shadow-slate-200/50 dark:border-slate-700/30 dark:bg-slate-800/30 dark:hover:border-slate-600/50 dark:hover:bg-slate-800/60 dark:hover:shadow-slate-950/50 sm:p-5"
     >
-      {/* Subtle inner glow on hover */}
-      <div className="pointer-events-none absolute inset-0 rounded-2xl bg-linear-to-br from-blue-500/0 to-blue-400/0 opacity-0 transition-opacity duration-300 group-hover:from-blue-500/5 group-hover:to-blue-400/5 group-hover:opacity-100 dark:group-hover:from-blue-500/10 dark:group-hover:to-blue-400/10" />
+      {/* Animated gradient glow on hover */}
+      <div className="pointer-events-none absolute inset-0 rounded-xl bg-linear-to-br from-blue-500/0 via-transparent to-purple-500/0 opacity-0 transition-opacity duration-400 group-hover:from-blue-500/8 group-hover:via-transparent group-hover:to-purple-500/8 group-hover:opacity-100 dark:group-hover:from-blue-500/12 dark:group-hover:to-purple-500/12" />
 
-      <img
-        src={tech.icon}
-        alt={tech.name}
-        loading="lazy"
-        className="relative z-10 h-9 w-9 object-contain drop-shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_10px_rgba(59,130,246,0.45)] sm:h-11 sm:w-11"
-        onError={(e) => {
-          e.currentTarget.style.display = 'none';
-          const fb = document.createElement('span');
-          fb.className =
-            'flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-lg bg-blue-100 text-sm font-bold text-blue-600 dark:bg-blue-900/30 dark:text-blue-400';
-          fb.textContent = tech.name.slice(0, 2).toUpperCase();
-          e.currentTarget.parentElement?.insertBefore(fb, e.currentTarget.nextSibling);
-        }}
-      />
+      {/* Icon container with enhanced hover effect */}
+      <div className="relative z-10 flex items-center justify-center">
+        <img
+          src={tech.icon}
+          alt={tech.name}
+          loading="lazy"
+          className="h-10 w-10 object-contain drop-shadow-sm transition-all duration-400 group-hover:scale-125 group-hover:drop-shadow-[0_0_12px_rgba(59,130,246,0.5)] sm:h-12 sm:w-12"
+          onError={(e) => {
+            e.currentTarget.style.display = 'none';
+            const fb = document.createElement('div');
+            fb.className =
+              'flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-lg bg-gradient-to-br from-blue-100 to-blue-50 text-xs font-bold text-blue-700 dark:from-blue-900/40 dark:to-blue-800/40 dark:text-blue-300';
+            fb.textContent = tech.name.slice(0, 2).toUpperCase();
+            e.currentTarget.parentElement?.insertBefore(fb, e.currentTarget.nextSibling);
+          }}
+        />
+      </div>
 
-      <span className="relative z-10 w-full wrap-break-word px-1 text-[0.65rem] font-medium leading-tight text-slate-500 transition-colors duration-300 group-hover:text-blue-600 dark:text-slate-400 dark:group-hover:text-blue-400 sm:text-xs">
+      {/* Tech name label */}
+      <span className="relative z-10 w-full px-1 text-[0.7rem] font-semibold leading-snug text-slate-600 transition-colors duration-300 group-hover:text-slate-900 dark:text-slate-300 dark:group-hover:text-slate-100 sm:text-xs">
         {tech.name}
       </span>
     </motion.li>
@@ -88,57 +92,79 @@ export default function TechStack() {
   return (
     <section
       id="tech"
-      className="bg-linear-to-br from-slate-50 via-white to-blue-50 py-10 md:py-16 lg:flex lg:min-h-screen lg:flex-col lg:justify-center lg:py-8 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950"
+      className="relative overflow-hidden bg-white py-16 md:py-20 lg:flex lg:min-h-screen lg:flex-col lg:justify-center lg:py-24 dark:bg-gradient-to-b dark:from-slate-950 dark:to-slate-900"
     >
-      <div className="mx-auto w-full max-w-4xl px-4 sm:px-6">
+      {/* Subtle background accent */}
+      <div className="pointer-events-none absolute -right-40 -top-40 h-96 w-96 rounded-full bg-blue-100/20 blur-3xl dark:bg-blue-500/5" />
+      <div className="pointer-events-none absolute -left-40 -bottom-40 h-96 w-96 rounded-full bg-purple-100/20 blur-3xl dark:bg-purple-500/5" />
+
+      <div className="relative mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
         <ScrollAnimation>
-          <div className="mb-8 text-center lg:mb-6">
-            <p className="mb-1 text-sm font-semibold uppercase tracking-[0.35em] text-blue-500 dark:text-blue-400">
-              Skills
-            </p>
-            <h2 className="text-4xl font-bold text-slate-900 dark:text-white lg:text-4xl xl:text-5xl">
+          <div className="mb-12 text-center lg:mb-16">
+            <motion.p 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mb-3 text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400"
+            >
+              ✨ Expert Tools
+            </motion.p>
+            <h2 className="text-balance text-4xl font-bold text-slate-900 dark:text-white md:text-5xl lg:text-6xl">
               Technology{' '}
-              <span className="text-blue-500 dark:text-blue-400">Stack</span>
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent dark:from-blue-400 dark:to-purple-400">
+                Stack
+              </span>
             </h2>
-            <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">
-              Technologies and tools I work with.
+            <p className="mx-auto mt-4 max-w-2xl text-base text-slate-600 dark:text-slate-300">
+              A carefully curated collection of modern technologies and tools I use to build high-performance applications.
             </p>
           </div>
         </ScrollAnimation>
 
-        {/* Frosted glass panel — matches Mikhail's card */}
+        {/* Main card container */}
         <ScrollAnimation delay={0.1}>
-          <div className="flex flex-col gap-4 overflow-hidden rounded-3xl border border-slate-200/50 bg-white/60 p-4 shadow-xl shadow-blue-100/30 backdrop-blur-xl sm:gap-5 sm:p-6 dark:border-slate-700/40 dark:bg-slate-900/60 dark:shadow-blue-500/10">
+          <div className="relative overflow-hidden rounded-2xl border border-slate-200/50 bg-gradient-to-br from-white/80 via-white/70 to-slate-50/50 p-6 backdrop-blur-2xl shadow-2xl shadow-slate-200/20 sm:p-8 dark:border-slate-700/30 dark:from-slate-800/60 dark:via-slate-800/50 dark:to-slate-900/50 dark:shadow-slate-950/40">
+            
+            {/* Premium border glow effect */}
+            <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-blue-500/10 dark:to-purple-500/10" />
 
-            {/* Tab bar */}
-            <div className="flex h-10 shrink-0 gap-1 rounded-full bg-slate-100/80 p-1 shadow-inner dark:bg-slate-800/80">
+            {/* Tab bar — modern segmented control */}
+            <div className="mb-8 flex gap-2 rounded-xl bg-slate-100/50 p-1.5 backdrop-blur-sm dark:bg-slate-700/30 sm:mb-10 sm:gap-2">
               {TABS.map((tab) => (
-                <button
+                <motion.button
                   key={tab}
                   type="button"
                   onClick={() => setActive(tab)}
-                  className={`relative flex-1 rounded-full px-2 py-1 text-xs font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 sm:text-sm ${
+                  layoutId="activeTab"
+                  className={`relative flex-1 rounded-lg px-3 py-2.5 text-xs font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-800 sm:px-4 sm:py-3 sm:text-sm ${
                     active === tab
-                      ? 'bg-linear-to-r from-blue-600 to-blue-400 text-white shadow-md shadow-blue-500/40 scale-105'
-                      : 'text-slate-500 hover:bg-white/60 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-700/60 dark:hover:text-slate-200'
+                      ? 'text-white shadow-lg shadow-blue-500/30'
+                      : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100'
                   }`}
                 >
-                  {tab}
-                </button>
+                  {active === tab && (
+                    <motion.div
+                      layoutId="activeTabBg"
+                      className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-600 dark:to-blue-500"
+                      transition={{ duration: 0.3 }}
+                    />
+                  )}
+                  <span className="relative z-10">{tab}</span>
+                </motion.button>
               ))}
             </div>
 
-            {/* Skill grid */}
+            {/* Skill grid with stagger animation */}
             <AnimatePresence mode="wait">
               <motion.ul
                 key={active}
-                initial={{ opacity: 0, y: 8 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.2 }}
-                className="grid grid-cols-3 gap-3 sm:gap-4"
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.25 }}
+                className="grid grid-cols-3 gap-3 sm:grid-cols-4 sm:gap-4 lg:grid-cols-5 lg:gap-5"
               >
                 {SKILLS[active].map((tech, i) => (
                   <SkillCard key={tech.name} tech={tech} index={i} />
