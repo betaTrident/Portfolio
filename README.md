@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dev Portfolio
 
-## Getting Started
+A multi-app portfolio workspace built with Next.js, React, and TypeScript.
 
-First, run the development server:
+## Tech Stack
+
+- Next.js 16.1.6
+- React 19.2.3
+- TypeScript 5
+- Tailwind CSS 4
+- Framer Motion
+- Three.js + React Three Fiber
+
+## Workspace Layout
+
+The workspace currently contains:
+
+- apps/frontend: main portfolio app (active Next.js app)
+- apps/admin: admin area folder (structure present, app setup appears incomplete)
+
+Frontend source is inside:
+
+- apps/frontend/src/app
+- apps/frontend/src/components
+- apps/frontend/src/styles
+
+## Prerequisites
+
+- Node.js 20.9+ recommended
+- npm (package-lock.json is present)
+
+## Install Dependencies
+
+From the workspace root:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Run the Project (Current Working Command)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Because the Next.js app is under apps/frontend and there is no root-level app or pages directory, use:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npx next dev apps/frontend
+```
 
-## Learn More
+Then open:
 
-To learn more about Next.js, take a look at the following resources:
+- http://localhost:3000
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Build and Start (Current Working Commands)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npx next build apps/frontend
+npx next start apps/frontend
+```
 
-## Deploy on Vercel
+## Lint
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+From the root:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run lint
+```
+
+## Important Note About package.json Scripts
+
+Current scripts in package.json are:
+
+- npm run dev -> next dev
+- npm run build -> next build
+- npm run start -> next start
+
+These commands target the workspace root and currently fail with:
+
+"Couldn't find any pages or app directory"
+
+because the active Next.js app is nested under apps/frontend.
+
+If you want root npm scripts to work directly, update scripts to include apps/frontend.
+
+Example:
+
+```json
+{
+	"scripts": {
+		"dev": "next dev apps/frontend",
+		"build": "next build apps/frontend",
+		"start": "next start apps/frontend",
+		"lint": "eslint"
+	}
+}
+```
+
+## API Route
+
+Contact API route:
+
+- POST /api/contact
+
+Implemented at:
+
+- apps/frontend/src/app/api/contact/route.ts
+
+## Additional Docs
+
+- STRUCTURE.md: project structure reference
+- DESIGN.md: design system notes
+
+## Status
+
+README has been aligned with the current project configuration and verified runtime behavior.
