@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// Email validation regex
+// Email validation regex hehe
+
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // Type for contact form data
