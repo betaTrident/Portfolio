@@ -30,7 +30,8 @@ export const metadata: Metadata = {
   keywords: ["full-stack developer", "React", "Next.js", "web development", "TypeScript", "Node.js"],
   authors: [{ name: "Kent Bryan Colina" }],
   creator: "Kent Bryan Colina",
-  metadataBase: new URL("https://kentcolina.com"), // Replace with your actual domain
+  metadataBase: new URL("https://kentcolina.com"), // Replace with your actual domains
+  
   openGraph: {
     type: "website",
     locale: "en_US",
