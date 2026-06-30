@@ -6,7 +6,7 @@ type MdxContentProps = {
 
 export function MdxContent({ source }: MdxContentProps) {
   return (
-    <article className="flex flex-col gap-4 text-muted-foreground [&_h2]:mt-8 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-foreground [&_li]:ml-5 [&_li]:list-disc [&_p]:leading-7 [&_strong]:text-foreground">
+    <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-display prose-headings:tracking-tight prose-p:text-muted-foreground prose-p:leading-7 prose-strong:text-foreground prose-li:text-muted-foreground">
       <MDXRemote source={source} />
     </article>
   );

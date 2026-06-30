@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
+import { featuredProjectSlugs } from "@/data/projects-featured";
 import type { Project, ProjectFrontmatter } from "@/types/content";
 
 const projectsDirectory = path.join(process.cwd(), "content/projects");
@@ -12,10 +13,13 @@ function parseProjectFile(slug: string, fileContents: string): Project {
   return {
     slug,
     title: frontmatter.title,
+    category: frontmatter.category,
     description: frontmatter.description,
     date: frontmatter.date,
     tags: frontmatter.tags ?? [],
     featured: frontmatter.featured,
+    github: frontmatter.github ?? null,
+    demo: frontmatter.demo ?? null,
     href: frontmatter.href,
     content,
   };
@@ -47,4 +51,12 @@ export function getProject(slug: string): Project | null {
 
   const fileContents = fs.readFileSync(filePath, "utf8");
   return parseProjectFile(slug, fileContents);
+}
+
+export function getFeaturedProjects(): Project[] {
+  const projects = getProjects();
+
+  return featuredProjectSlugs
+    .map((slug) => projects.find((project) => project.slug === slug))
+    .filter((project): project is Project => project !== undefined);
 }
