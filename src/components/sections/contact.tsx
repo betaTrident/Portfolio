@@ -1,26 +1,18 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
+import { Reveal } from "@/components/motion/reveal";
 import { buttonVariants } from "@/components/ui/button";
 import { useClipboard } from "@/hooks/use-clipboard";
-import { fadeUp } from "@/lib/motion";
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export function Contact() {
-  const reduceMotion = useReducedMotion();
   const { copied, copy } = useClipboard(2000);
 
   return (
     <section id="contact" className="scroll-mt-20 py-24">
-      <motion.div
-        className="flex max-w-2xl flex-col gap-6"
-        initial={reduceMotion ? false : "hidden"}
-        whileInView={reduceMotion ? undefined : "show"}
-        viewport={{ once: true, margin: "-80px" }}
-        variants={fadeUp}
-      >
+      <Reveal className="flex max-w-2xl flex-col gap-6">
         <h2 className="section-label">08 / contact</h2>
 
         <h3 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
@@ -74,7 +66,7 @@ export function Contact() {
             <ArrowUpRight data-icon="inline-end" />
           </a>
         </div>
-      </motion.div>
+      </Reveal>
     </section>
   );
 }

@@ -1,22 +1,13 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
-import { fadeUp } from "@/lib/motion";
+import { Reveal } from "@/components/motion/reveal";
 import { siteConfig } from "@/lib/site";
 
 export function About() {
-  const reduceMotion = useReducedMotion();
-
   return (
     <section id="about" className="scroll-mt-20 py-24">
-      <motion.div
-        className="flex max-w-2xl flex-col gap-6"
-        initial={reduceMotion ? false : "hidden"}
-        whileInView={reduceMotion ? undefined : "show"}
-        viewport={{ once: true, margin: "-80px" }}
-        variants={fadeUp}
-      >
+      <Reveal className="flex max-w-2xl flex-col gap-6">
         <h2 className="section-label">01 / about</h2>
 
         <p className="text-lg leading-relaxed text-muted-foreground">
@@ -34,7 +25,7 @@ export function About() {
           Currently open to opportunities
           <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
         </a>
-      </motion.div>
+      </Reveal>
     </section>
   );
 }
