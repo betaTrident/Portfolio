@@ -30,7 +30,7 @@ export function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
-          01 / kent colina
+          01 / Kent Bryan Colina
         </motion.p>
 
         <motion.h1
@@ -58,8 +58,7 @@ export function Hero() {
             ease: "easeOut",
           }}
         >
-          Building agentic systems, AI-powered workflows, and full-stack
-          software that solves real problems.
+          I build scalable solutions that drive real business impact.
         </motion.p>
       </div>
 

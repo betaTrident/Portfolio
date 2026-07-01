@@ -11,11 +11,11 @@ export function About() {
         <h2 className="section-label">01 / about</h2>
 
         <p className="text-lg leading-relaxed text-muted-foreground">
-          I&apos;m Kent — a full-stack developer and AI engineer based in Cebu,
-          Philippines. I focus on building agentic systems, multi-agent pipelines,
+          I'm a full-stack engineer and AI engineer. I focus on building agentic systems, multi-agent pipelines,
           and AI-powered applications that turn messy workflows into structured
-          software. Currently finishing my BS in Information Technology at CTU
-          while shipping production code at Symph.
+          software.My work focuses on turning complex ideas into practical systems, 
+          from planning and architecture to implementation. I enjoy building solutions 
+          that improve workflows, support real users, and create practical value for businesses.
         </p>
 
         <a
