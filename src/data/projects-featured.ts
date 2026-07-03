@@ -1,8 +1,8 @@
 export const featuredProjectSlugs = [
   "orca",
   "reply-ai-agent",
-  "usaii-global",
-  "oltek-hackathon",
+  "peaksy",
+  "courthub",
 ] as const;
 
 export type FeaturedProjectSlug = (typeof featuredProjectSlugs)[number];

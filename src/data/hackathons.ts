@@ -33,8 +33,8 @@ export const hackathons: Hackathon[] = [
   {
     name: "OLTEK Paper to Data Hackathon",
     year: 2025,
-    result: "Top 10",
-    resultLabel: "Finalist",
+    result: "Finalist",
+    resultLabel: "",
     description:
       "Document intelligence platform — contracts and scanned logistics papers into structured datasets via OCR + LLM extraction.",
     tags: ["FastAPI", "PaddleOCR", "Ollama", "Next.js", "Docker"],

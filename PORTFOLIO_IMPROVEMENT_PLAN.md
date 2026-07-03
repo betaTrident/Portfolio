@@ -128,7 +128,7 @@ Notes:
 In `hero.tsx`, immediately above the `heroStats.map(...)` grid, add:
 
 ```tsx
-<p className="section-label !mb-0">Proven under pressure</p>
+<p className="section-label mb-0">Proven under pressure</p>
 ```
 
 Reuses the existing `.section-label` utility for consistency; tells first-time visitors what the numbers mean before they read them.

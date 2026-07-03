@@ -1,5 +1,6 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
+import { GithubIcon } from "@/components/icons/brand-icons";
 import { siteConfig } from "@/lib/site";
 
 export function About() {
@@ -12,15 +13,17 @@ export function About() {
           <div className="flex flex-col gap-4 text-lg leading-relaxed text-muted-foreground">
             <p>
               I&apos;m a full-stack developer and AI engineer. Most of my work
-              lives in two worlds: production software with real users - Peaksy
-              and CourtHub at Symph, point-of-sale systems built for local
-              businesses - and agentic AI, where I&apos;ve ranked top-64 of
-              1,920+ teams in the Reply AI Agent Challenge and reached the
-              finals of two other global hackathons.
+              lives in three places: production software with real users -
+              I helped build Peaksy and CourtHub as part of a small internship
+              team at Symph, alongside a co-intern and a senior developer;
+              point-of-sale systems I built solo for local businesses; and
+              agentic AI, where I&apos;ve ranked top-64 of 1,920+ teams in the
+              Reply AI Agent Challenge and reached the finals of two other
+              global hackathons.
             </p>
             <p>
-              What ties it together is how I build: small, legible systems;
-              strict types; interfaces that respond instantly. I&apos;d rather
+              What ties it together is how I build: small, legible systems,
+              strict types, interfaces that respond instantly. I&apos;d rather
               ship one thing that holds up under inspection than five that
               don&apos;t.
             </p>
@@ -44,14 +47,20 @@ export function About() {
             className="aspect-4/5 w-full rounded-md border border-border object-cover"
             priority={false}
           />
-          <a
-            href={siteConfig.links.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-mono text-[11px] leading-relaxed text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-          >
-            TypeScript + Python / github.com/betaTrident
-          </a>
+          <div className="flex flex-col gap-2">
+          
+            <a
+              href={siteConfig.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View Kent Colina's GitHub profile"
+              className="group inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1.5 font-mono text-[11px] text-muted-foreground transition-colors hover:border-accent-ai/40 hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              <GithubIcon className="size-3.5 shrink-0" />
+              <span>View GitHub</span>
+              <ArrowUpRight className="size-3 shrink-0 -translate-x-0.5 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
+            </a>
+          </div>
         </div>
       </div>
     </section>

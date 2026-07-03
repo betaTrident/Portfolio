@@ -1,8 +1,37 @@
+import { Mail } from "lucide-react";
 import Link from "next/link";
 import { CommandMenuTrigger } from "@/components/command-menu-trigger";
+import { GithubIcon, LinkedinIcon } from "@/components/icons/brand-icons";
 import { SidebarNav } from "@/components/layout/sidebar-nav";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { siteConfig } from "@/lib/site";
+
+const socialLinks = [
+  {
+    label: "GitHub",
+    href: siteConfig.links.github,
+    icon: GithubIcon,
+    external: true,
+  },
+  {
+    label: "LinkedIn",
+    href: siteConfig.links.linkedin,
+    icon: LinkedinIcon,
+    external: true,
+  },
+  {
+    label: "Email",
+    href: `mailto:${siteConfig.email}`,
+    icon: Mail,
+    external: false,
+  },
+] as const;
 
 export function Sidebar() {
   return (
@@ -34,30 +63,28 @@ export function Sidebar() {
 
         <div className="flex items-center justify-between gap-3">
           <ThemeToggle />
-          <div className="flex gap-3 font-mono text-[11px] text-muted-foreground">
-            <a
-              href={siteConfig.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            >
-              github
-            </a>
-            <a
-              href={siteConfig.links.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            >
-              linkedin
-            </a>
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            >
-              email
-            </a>
-          </div>
+          <TooltipProvider>
+            <div className="flex items-center gap-1">
+              {socialLinks.map(({ label, href, icon: Icon, external }) => (
+                <Tooltip key={label}>
+                  <TooltipTrigger
+                    render={
+                      <a
+                        href={href}
+                        target={external ? "_blank" : undefined}
+                        rel={external ? "noopener noreferrer" : undefined}
+                        aria-label={label}
+                        className="inline-flex size-8 items-center justify-center rounded-md border border-transparent text-muted-foreground transition-colors hover:border-border hover:bg-muted hover:text-accent-ai focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                      />
+                    }
+                  >
+                    <Icon className="size-4" />
+                  </TooltipTrigger>
+                  <TooltipContent>{label}</TooltipContent>
+                </Tooltip>
+              ))}
+            </div>
+          </TooltipProvider>
         </div>
       </div>
     </aside>

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 import type { Project } from "@/types/content";
@@ -15,6 +15,7 @@ type ProjectCardProps = {
 
 export function ProjectCard({ project, className }: ProjectCardProps) {
   const year = new Date(project.date).getFullYear();
+  const projectHref = `/projects/${project.slug}`;
 
   return (
     <motion.div
@@ -22,46 +23,51 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
       transition={{ duration: 0.2, ease: "easeOut" }}
       className={cn("h-full", className)}
     >
-      <Card className="flex h-full flex-col transition-shadow hover:shadow-md">
-        <CardHeader className="gap-3">
-          <div className="flex items-center justify-between gap-2">
-            <Badge
-              variant="outline"
-              className="font-mono text-[0.65rem] uppercase tracking-wider"
-            >
-              {project.category}
-            </Badge>
-            <span className="font-mono text-xs text-muted-foreground">
-              {year}
-            </span>
-          </div>
-          <CardTitle className="font-display text-xl font-semibold">
-            {project.title}
-          </CardTitle>
-          <p className="text-sm text-muted-foreground">{project.description}</p>
-        </CardHeader>
-        <CardContent className="mt-auto flex flex-col gap-4">
-          <div className="flex flex-wrap gap-1.5">
-            {project.tags.map((tag) => (
+      <Link
+        href={projectHref}
+        aria-label={`View details for ${project.title}`}
+        className="group block h-full rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+      >
+        <Card className="flex h-full flex-col transition-shadow group-hover:shadow-md">
+          <CardHeader className="gap-3">
+            <div className="flex items-center justify-between gap-2">
               <Badge
-                key={tag}
                 variant="outline"
-                className="font-mono text-[0.65rem] font-normal"
+                className="font-mono text-[0.65rem] uppercase tracking-wider"
               >
-                {tag}
+                {project.category}
               </Badge>
-            ))}
-          </div>
-          <Link
-            href={`/projects/${project.slug}`}
-            aria-label={`View ${project.title} case study`}
-            className="group inline-flex w-fit items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-accent-ai"
-          >
-            case study
-            <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-          </Link>
-        </CardContent>
-      </Card>
+              <span className="font-mono text-xs text-muted-foreground">
+                {year}
+              </span>
+            </div>
+            <CardTitle className="font-display text-xl font-semibold transition-colors group-hover:text-accent-ai">
+              {project.title}
+            </CardTitle>
+            <p className="text-sm text-muted-foreground">{project.description}</p>
+          </CardHeader>
+          <CardContent className="mt-auto flex flex-col gap-4">
+            <div className="flex flex-wrap gap-1.5">
+              {project.tags.map((tag) => (
+                <Badge
+                  key={tag}
+                  variant="outline"
+                  className="font-mono text-[0.65rem] font-normal"
+                >
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+            <span
+              aria-hidden="true"
+              className="inline-flex w-fit items-center gap-1.5 text-sm text-muted-foreground transition-colors group-hover:text-accent-ai"
+            >
+              view details
+              <ArrowUpRight className="size-3 shrink-0" />
+            </span>
+          </CardContent>
+        </Card>
+      </Link>
     </motion.div>
   );
 }
