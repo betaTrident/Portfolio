@@ -4,17 +4,17 @@ export const fontDisplay = Space_Grotesk({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  display: "swap",
+  display: "optional",
 });
 
 export const fontSans = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
-  display: "swap",
+  display: "optional",
 });
 
 export const fontMono = JetBrains_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
-  display: "swap",
+  display: "optional",
 });

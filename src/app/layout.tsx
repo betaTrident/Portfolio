@@ -1,8 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { ThemeProvider } from "next-themes";
+import { CommandMenuProvider } from "@/components/command-menu-provider";
 import { DeferredVitals } from "@/components/layout/deferred-vitals";
 import { Footer } from "@/components/layout/footer";
-import { Navbar } from "@/components/layout/navbar";
+import { MobileTopbar } from "@/components/layout/mobile-topbar";
+import { Sidebar } from "@/components/layout/sidebar";
+import { getProjects } from "@/lib/content";
 import { fontDisplay, fontMono, fontSans } from "@/lib/fonts";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
@@ -58,6 +61,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const enableVitals = process.env.VERCEL === "1" || Boolean(process.env.VERCEL_ENV);
+  const projects = getProjects().map((project) => ({
+    title: project.title,
+    slug: project.slug,
+    category: project.category,
+  }));
+
   return (
     <html
       lang="en"
@@ -72,15 +82,18 @@ export default function RootLayout({
           Skip to content
         </a>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <div className="flex min-h-screen flex-col">
-            <Navbar />
-            <main id="main" className="flex-1">
-              {children}
-            </main>
-            <Footer />
-          </div>
+          <CommandMenuProvider projects={projects}>
+            <div className="flex min-h-screen flex-col">
+              <Sidebar />
+              <MobileTopbar />
+              <main id="main" className="flex-1 lg:pl-56">
+                {children}
+              </main>
+              <Footer className="lg:pl-56" />
+            </div>
+          </CommandMenuProvider>
         </ThemeProvider>
-        <DeferredVitals />
+        <DeferredVitals enabled={enableVitals} />
       </body>
     </html>
   );

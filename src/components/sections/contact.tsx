@@ -13,7 +13,7 @@ export function Contact() {
   return (
     <section id="contact" className="scroll-mt-20 py-24">
       <Reveal className="flex max-w-2xl flex-col gap-6">
-        <h2 className="section-label">08 / contact</h2>
+        <h2 className="section-label">06 / contact</h2>
 
         <h3 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
           Let&apos;s build something.

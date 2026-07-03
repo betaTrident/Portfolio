@@ -15,8 +15,8 @@ export const experience: ExperienceEntry[] = [
     location: "Cebu City, Philippines",
     type: "work",
     bullets: [
-      "Contributed to Peaksy, Peaksy Mobile, and CourtHub in a Git-based monorepo.",
-      "Built and improved full-stack features across auth, profiles, search, bookings, payments, and chat.",
+      "Contributed to Peaksy, Peaksy Mobile, and CourtHub across 3 production product surfaces.",
+      "Built and improved full-stack features across auth, profiles, search, bookings, payments, and chat workflows.",
     ],
   },
   {
@@ -26,8 +26,8 @@ export const experience: ExperienceEntry[] = [
     location: "Philippines",
     type: "work",
     bullets: [
-      "Delivered custom POS, inventory, and community management systems for clients.",
-      "Managed end-to-end development: planning, implementation, deployment, and client support.",
+      "Delivered custom POS, inventory, and community management systems across 3 client software categories.",
+      "Managed end-to-end development from planning through deployment and client support.",
     ],
   },
   {

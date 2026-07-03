@@ -1,89 +1,29 @@
-"use client";
-
-import { motion, useReducedMotion } from "motion/react";
-import { experience, getExperienceYear } from "@/data/experience";
-import { Badge } from "@/components/ui/badge";
-import { fadeUp } from "@/lib/motion";
-import { cn } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { ExperienceTimeline } from "@/components/experience/experience-timeline";
+import { experience } from "@/data/experience";
 
 export function Experience() {
-  const reduceMotion = useReducedMotion();
-
   return (
     <section id="experience" className="scroll-mt-20 py-24">
-      <h2 className="section-label mb-10">04 / experience</h2>
-
-      <div className="flex flex-col">
-        {experience.map((entry, index) => {
-          const year = getExperienceYear(entry.period);
-          const isLast = index === experience.length - 1;
-
-          return (
-            <motion.div
-              key={`${entry.company}-${entry.role}`}
-              className={cn(
-                "grid grid-cols-1 gap-3 md:grid-cols-[4rem_1px_1fr] md:gap-x-8 md:gap-y-0",
-                !isLast && "pb-10"
-              )}
-              initial={reduceMotion ? false : "hidden"}
-              whileInView={reduceMotion ? undefined : "show"}
-              viewport={{ once: true, margin: "-80px" }}
-              variants={fadeUp}
-            >
-              <div className="font-mono text-sm text-muted-foreground md:pt-0.5">
-                {year}
-              </div>
-
-              <div
-                className={cn(
-                  "hidden bg-border md:block",
-                  isLast ? "self-stretch" : "min-h-full"
-                )}
-                aria-hidden="true"
-              />
-
-              <div className="flex flex-col gap-3">
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div className="flex flex-col gap-1">
-                    <h3 className="font-display text-lg font-semibold tracking-tight">
-                      {entry.role}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      {entry.company}
-                    </p>
-                  </div>
-                  {entry.type === "education" ? (
-                    <Badge
-                      variant="outline"
-                      className="font-mono text-[0.65rem] uppercase tracking-wider"
-                    >
-                      Education
-                    </Badge>
-                  ) : null}
-                </div>
-
-                <p className="font-mono text-xs text-muted-foreground">
-                  {entry.location} · {entry.period}
-                </p>
-
-                {entry.bullets.length > 0 ? (
-                  <ul className="flex flex-col gap-2 text-sm text-muted-foreground">
-                    {entry.bullets.map((bullet) => (
-                      <li key={bullet} className="flex gap-2">
-                        <span
-                          className="mt-2 size-1 shrink-0 rounded-full bg-accent-ai"
-                          aria-hidden="true"
-                        />
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-              </div>
-            </motion.div>
-          );
-        })}
+      <div className="mb-10 flex flex-col gap-3">
+        <div className="flex items-end justify-between gap-4">
+          <h2 className="section-label">04 / experience</h2>
+          <Link
+            href="/experience"
+            className="group inline-flex shrink-0 items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-accent-ai"
+          >
+            full history
+            <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+          </Link>
+        </div>
+        <p className="max-w-2xl text-sm text-muted-foreground">
+          Shipping production software at Symph while competing in global AI
+          hackathons on the side.
+        </p>
       </div>
+
+      <ExperienceTimeline entries={experience} limit={2} />
     </section>
   );
 }

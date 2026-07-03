@@ -33,23 +33,16 @@ export function Hero() {
           01 / Kent Bryan Colina
         </motion.p>
 
-        <motion.h1
+        <h1
           className="max-w-3xl font-display text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl"
-          initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.45,
-            delay: motionDelay(reduceMotion, 100),
-            ease: "easeOut",
-          }}
         >
           Full-Stack Developer
           <br />
           &amp; AI Engineer.
-        </motion.h1>
+        </h1>
 
         <motion.p
-          className="max-w-2xl text-lg text-muted-foreground"
+          className="flex max-w-2xl flex-col gap-3 text-lg text-muted-foreground"
           initial={reduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{
@@ -58,7 +51,15 @@ export function Hero() {
             ease: "easeOut",
           }}
         >
-          I build scalable solutions that drive real business impact.
+          <span>
+            I build full-stack products and agentic AI systems - and I care how
+            they&apos;re built: typed end to end, measured before shipped, fast
+            enough that nobody thinks about it.
+          </span>
+          <span className="text-base text-muted-foreground/80">
+            Right now I&apos;m deep in multi-agent pipelines and document
+            intelligence, and I like being tested on it.
+          </span>
         </motion.p>
       </div>
 
@@ -75,31 +76,34 @@ export function Hero() {
       />
 
       <motion.div
-        className="grid grid-cols-1 gap-6 sm:grid-cols-3"
+        className="flex flex-col gap-4"
         initial={reduceMotion ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: motionDelay(reduceMotion, 400) }}
       >
-        {heroStats.map((stat, index) => (
-          <motion.div
-            key={stat.label}
-            className="flex flex-col gap-1"
-            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.45,
-              delay: motionDelay(reduceMotion, 400 + index * 80),
-              ease: "easeOut",
-            }}
-          >
-            <span className="font-mono text-sm font-medium text-accent-ai">
-              {stat.value}
-            </span>
-            <span className="font-mono text-xs text-muted-foreground">
-              {stat.label}
-            </span>
-          </motion.div>
-        ))}
+        <p className="section-label !mb-0">Proven under pressure</p>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+          {heroStats.map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              className="flex flex-col gap-1"
+              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.45,
+                delay: motionDelay(reduceMotion, 400 + index * 80),
+                ease: "easeOut",
+              }}
+            >
+              <span className="font-mono text-sm font-medium text-accent-ai">
+                {stat.value}
+              </span>
+              <span className="font-mono text-xs text-muted-foreground">
+                {stat.label}
+              </span>
+            </motion.div>
+          ))}
+        </div>
       </motion.div>
 
       <motion.div

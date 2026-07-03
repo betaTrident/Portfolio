@@ -33,6 +33,10 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# local IDE MCP configs
+.cursor/mcp.json
+.agents/mcp_config.json
+
 # vercel
 .vercel
 
@@ -42,3 +46,7 @@ next-env.d.ts
 
 # firecrawl cache
 .firecrawl/
+
+# local QA artifacts
+.phase7-artifacts/
+.next-*.log

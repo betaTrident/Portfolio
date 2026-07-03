@@ -14,14 +14,14 @@ const SpeedInsights = dynamic(
   { ssr: false }
 );
 
-export function DeferredVitals() {
+export function DeferredVitals({ enabled }: { enabled: boolean }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
+  if (!enabled || !mounted) {
     return null;
   }
 

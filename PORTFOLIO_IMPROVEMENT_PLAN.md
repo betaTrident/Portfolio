@@ -1,11 +1,13 @@
-# Portfolio Improvement Plan — v2
-### From "built" to "impressive": applying the bryllim.com teardown to Kent's live site
+# Portfolio Improvement Plan — v3
+### From "built" to "impressive": sidebar shell, craft-first copy, and the bryllim.com teardown applied to Kent's live site
 
-> **Context:** `PORTFOLIO_PLAN.md` (v1) has already been executed — Hero, About, Projects (+ `/projects/[slug]` deep pages), Hackathons, Experience, Skills, Contact, SEO, and Lighthouse hardening all exist in the codebase today. This plan does **not** rebuild the site. It's a targeted upgrade pass that applies the findings from `portfolio_analysis.md` (the bryllim.com teardown) to what's already live — copy, structure, credibility signals, and one genuinely unique signature touch.
+> **Context:** `PORTFOLIO_PLAN.md` (v1) has already been executed — Hero, About, Projects (+ `/projects/[slug]` deep pages), Hackathons, Experience, Skills, Contact, SEO, and Lighthouse hardening all exist in the codebase today. This plan does **not** rebuild the site. It's a targeted upgrade pass that applies the findings from `portfolio_analysis.md` and a fresh Jul 3, 2026 re-scrape of bryllim.com (raw assets in `.firecrawl/bryllim-layout.json`, `bryllim-layout.html`, `bryllim-screenshot.png`) — layout shell, copy, structure, credibility signals, and one signature interaction.
 >
-> **Design constraint (non-negotiable):** Keep the current minimalist, editorial, mono-label aesthetic. Nothing in this plan adds visual clutter, gimmicks, or anything that contradicts the "cold-precise, signal-forward, minimal" identity defined in `PORTFOLIO_PLAN.md`. Where bryllim.com does something loud (live viewer counts, AI chat bar, typing game), this plan deliberately does the *quiet, credible* equivalent instead — because that's what's authentic to Kent's stage and story.
+> **What changed from v2:** (1) A new **Phase 2 — Sidebar Shell**, based on a structural teardown of bryllim's actual sidebar markup, redesigned to be Kent's own rather than a clone. (2) Hero sub-line and About copy re-polished around **craft** — informed by what's actually in Kent's GitHub (`github.com/betaTrident`: agentic ADK work, document-intelligence systems, POS products shipped for real businesses). (3) All implementation phases standardized on **`gpt-5.5-medium`** per Kent's request (requested `gpt-5.4 medium` is not an available Cursor model slug; `gpt-5.5-medium` is the closest match). (4) Every phase now carries explicit Lighthouse-100 guardrails, since the sidebar is a layout-shell change — the highest CLS/LCP risk in the whole plan.
 >
-> **Structure:** 6 phases, each independently shippable and reviewable. Do not start a phase until the previous one's checklist is fully checked off. Each phase lists a **primary model recommendation** (with a fallback/alternative) and the **specific Cursor skills** to invoke — chosen per the actual nature of the work, not defaulted to one model for everything.
+> **Design constraint (non-negotiable):** Keep the current minimalist, editorial, mono-label aesthetic. Nothing here adds visual clutter or gimmicks. Where bryllim.com does something loud (live viewer counts, AI chat bar, typing game), this plan does the *quiet, credible* equivalent.
+>
+> **Structure:** 7 phases, each independently shippable and reviewable. Do not start a phase until the previous one's checklist is fully checked off.
 
 ---
 
@@ -20,382 +22,456 @@ Confirmed in the current codebase:
 ✅ src/app/sitemap.ts, robots.ts, opengraph-image.tsx
 ✅ src/lib/structured-data.ts           → Person JSON-LD
 ✅ src/data/{stats,hackathons,experience,skills,projects-featured}.ts
-✅ Navbar with mobile sheet, theme toggle, scroll-linked nav
+✅ src/components/layout/navbar.tsx     → sticky top navbar, mobile sheet, theme toggle
 ✅ Motion: fadeUp/fadeIn/stagger variants, useReducedMotion everywhere
+✅ layout.tsx skip-link, DeferredVitals, ThemeProvider
 ```
 
-**Gap analysis against `portfolio_analysis.md`:**
+**Gap analysis against bryllim.com (Jul 3 re-scrape + `portfolio_analysis.md`):**
 
 | Bryllim technique | Status on Kent's site today |
 |---|---|
-| Progressive disclosure (homepage digest → deep pages) | ✅ Done for **Projects** only. ❌ Missing for Experience, Skills/Stack, Hackathons — these sections dump full content directly on the homepage with no condensed/full split. |
-| One-line framing sentence per section | ❌ None of the 5 content sections (Projects, Hackathons, Experience, Skills, Contact) have an intro sentence — they jump straight from the section label into content. |
-| Metrics in every claim | ⚠️ Partial — hackathons have hard numbers; Experience bullets are mostly still task descriptions, not outcome metrics. |
-| Verify links for credentials | ❌ Not present — hackathon results and any certs are unverifiable claims right now. |
-| Category tags framed as "systems" not "projects" | ✅ Already implemented (`project.category` badge: AI System, SaaS Product, etc.) |
+| **Fixed left sidebar shell** (persistent identity + grouped nav + utility footer, content offset right) | ❌ Kent uses a sticky top navbar. The sidebar is bryllim's single most recognizable layout decision — it makes the site read as a "tool/dashboard," not a template. Phase 2 adds Kent's own differentiated version. |
+| Progressive disclosure (homepage digest → deep pages) | ✅ Done for **Projects** only. ❌ Missing for Experience, Skills/Stack, Hackathons. |
+| One-line framing sentence per section | ❌ None of the content sections have an intro sentence. |
+| Metrics in every claim | ⚠️ Partial — hackathons have hard numbers; Experience bullets are mostly task descriptions. |
+| Verify links for credentials | ❌ Not present. |
+| Category tags framed as "systems" not "projects" | ✅ Already implemented (`project.category` badge). |
 | Recommendations section | ❌ Doesn't exist. |
-| Hero/About copy specificity | ❌ Generic corporate phrasing, no named proof points (flagged in `portfolio_analysis.md` §6–7). |
-| One unique, memorable interactive element | ❌ Nothing yet — the site is competent but has no single "wow, that's clever" moment the way bryllim's AI-bar/typing-game does. |
+| Hero/About copy specificity + voice | ❌ Hero sub-line is generic corporate phrasing ("scalable solutions that drive real business impact"); About has a missing-space typo and repeats "practical value" filler. Neither says anything about *how* Kent builds — the craft angle is absent. |
+| One unique, memorable interactive element | ❌ Nothing yet. |
 
-These seven gaps map directly onto the six phases below.
+**GitHub audit (`api.github.com/users/betaTrident`, 30 public repos)** — real proof points available for copy and content phases:
+
+- **Agentic AI:** `ai-agent-challenge` (the #64/1,920 Reply entry), `build-with-ai-adk`, `adk-skills-lab` (Google ADK), `Mock-AI` (Gemini-powered mock interviews)
+- **Document intelligence:** `aixtraxt`, `E-Xtract`, `Open-PLAI`
+- **Shipped for real businesses:** `Rayn-Motoparts-POS`, `Coffito-Coffee-Shop-POS-Web` + `Coffito-POS-Desktop-Application` (same product, two form factors), `ByteZone`
+- **Breadth signals:** `Solar-Simp-IoT` (C++ hardware), `MoodTunes` (CV + audio ML), `icu-patient-monitor`
+- Languages: predominantly TypeScript and Python — matches the "full-stack + AI" positioning exactly.
 
 ---
 
 ## Phase Overview
 
-| Phase | Focus | Primary Model | Alt. Model | Key Skills |
-|---|---|---|---|---|
-| **1** | Copy & messaging rewrite | `claude-4.5-sonnet-thinking` | `composer-2.5` | — (pure writing/judgment task) |
-| **2** | Progressive disclosure structure (deep pages + condensed homepage) | `composer-2.5` | `gpt-5.3-codex` | `nextjs`, `shadcn`, `react-best-practices` |
-| **3** | Credibility & proof layer | `composer-2.5` | `claude-4.5-sonnet-thinking` | `shadcn`, `react-best-practices` |
-| **4** | Signature interaction (unique differentiator) | `claude-4.5-sonnet-thinking` | `composer-2.5` | `shadcn` (Command), `react-best-practices` |
-| **5** | Content completion & asset polish | `composer-2.5-fast` | `composer-2.5` | `verification-before-completion` |
-| **6** | QA, accessibility & performance hardening | `composer-2.5` | `gpt-5.3-codex` | `nextjs`, `react-best-practices`, `verification-before-completion` |
+| Phase | Focus | Model | Key Skills |
+|---|---|---|---|
+| **1** | Copy & messaging rewrite (craft-first hero + about) | `gpt-5.5-medium` | — (pure writing/judgment) |
+| **2** | **Sidebar shell layout** (new) | `gpt-5.5-medium` | `nextjs`, `shadcn`, `react-best-practices` |
+| **3** | Progressive disclosure (deep pages + condensed homepage) | `gpt-5.5-medium` | `nextjs`, `shadcn`, `react-best-practices` |
+| **4** | Credibility & proof layer | `gpt-5.5-medium` | `shadcn`, `react-best-practices` |
+| **5** | Signature interaction: ⌘K command palette | `gpt-5.5-medium` | `shadcn` (Command), `react-best-practices` |
+| **6** | Content completion & asset polish | `gpt-5.5-medium` | `verification-before-completion` |
+| **7** | QA, accessibility & Lighthouse-100 hardening | `gpt-5.5-medium` | `nextjs`, `react-best-practices`, `verification-before-completion` |
 
-**Why not composer-2.5 for every phase:** Phase 1 is 90% judgment/taste (word choice, tone, what to emphasize) with almost no code — a strong reasoning/writing model earns its keep there. Phase 4 involves a genuinely novel interaction design decision (not a templated CRUD task), so a stronger reasoning model reduces the chance of building something gimmicky. Phases 2, 3, 5, 6 are structural/mechanical — exactly where `composer-2.5` is fast and reliable. Use the "Alt. Model" if the primary is unavailable or if a phase turns out more complex than expected once you're in it.
+All phases use `gpt-5.5-medium` per Kent's direction (single model for the whole implementation keeps context/style consistent across phases). If any phase stalls on a genuinely hard design judgment, `claude-4.6-opus-high-thinking` is the escalation option — but the specs below are written tightly enough that this shouldn't be needed.
+
+**Phase ordering rationale:** Copy first (Phase 1) because it's zero-risk and everything downstream (sidebar labels, framing lines, OG images) references the final copy. Sidebar second (Phase 2) because Phases 3–5 all touch navigation — building them against the final shell avoids doing nav work twice.
 
 ---
 
-## Phase 1 — Copy & Messaging Rewrite
+## Phase 1 — Copy & Messaging Rewrite (Craft-First)
 
-> **Goal:** Every sentence on the homepage either names a specific thing (a number, a product, a company) or earns its place. No generic filler survives this phase.
+> **Goal:** Every sentence on the homepage either names a specific thing (a number, a product, a repo, a company) or earns its place. The hero and about now lead with **craft** — how Kent builds, not just what — backed by things that are verifiably true on his GitHub.
 >
-> **Model:** `claude-4.5-sonnet-thinking` (primary) — copywriting quality benefits from a model optimized for nuanced language judgment over raw code throughput. `composer-2.5` as fallback if you want to stay in one model for the whole project.
-> **Skills:** None required — this is a direct editing task, not a framework-specific one.
-> **Risk:** Very low. Text-only changes, no new components, nothing that can break the build.
+> **Model:** `gpt-5.5-medium`. **Skills:** none required. **Risk:** Very low — text-only.
 
 ### 1.1 — Hero sub-headline (`src/components/sections/hero.tsx`)
 
 Replace:
+
 ```
 I build scalable solutions that drive real business impact.
 ```
-With (per `portfolio_analysis.md` §6, Option A):
+
+With a two-line craft-forward statement (mirrors bryllim's two-paragraph hero formula — *what/how you build* → *current focus + proof* — but the content is Kent's own):
+
 ```
-I build full-stack apps and agentic AI systems — the kind that turn
-messy, manual workflows into software people actually rely on.
+Line 1:  I build full-stack products and agentic AI systems — and I care
+         how they're built: typed end to end, measured before shipped,
+         fast enough that nobody thinks about it.
+
+Line 2:  Right now I'm deep in multi-agent pipelines and document
+         intelligence, and I like being tested on it.
 ```
-Optionally split into a second line if the layout allows a two-line hero paragraph (mirrors bryllim's two-sentence hero formula: what you build → current focus + proof point):
-```
-Right now I'm deep in multi-agent pipelines and document-intelligence
-systems — and I like being tested on it.
-```
+
+Implementation notes:
+- Render as two `<p>` elements (or one `<p>` with a `<br className="hidden sm:block" />` split) inside the existing `motion.p` slot — keep the existing `max-w-2xl text-lg text-muted-foreground` classes and the 200ms motion delay. Line 2 can use `text-base text-muted-foreground/80` for hierarchy if two identical-weight paragraphs feel heavy.
+- "Typed end to end / measured before shipped / fast" are all *checkable* claims: the repo is strict TypeScript, the site targets Lighthouse 100, and the projects page shows perf notes. That's the difference between craft-talk and craft-proof.
+- Do **not** put the hackathon rank in the hero sub-line — the stats row directly below already carries `#64 / 1,920`. Repeating it in prose one viewport-line above would read as padding.
 
 ### 1.2 — About section (`src/components/sections/about.tsx`)
 
-Replace the current generic three-sentence paragraph with the rewrite from `portfolio_analysis.md` §7 (short alternative recommended, to preserve the `max-w-2xl` layout):
+Replace the current paragraph (which has the `software.My work` missing-space bug and two sentences of "practical value" filler) with a craft + proof rewrite. Keep it inside the existing `max-w-2xl` layout:
 
 ```
-I'm a full-stack developer and AI engineer building agentic systems and
-multi-agent pipelines that turn messy workflows into structured
-software. I've ranked top-64 out of 1,920+ teams in the Reply AI Agent
-Challenge and reached the finals of two other global AI hackathons —
-and I ship production software with real users at Symph (Peaksy,
-CourtHub).
+I'm a full-stack developer and AI engineer. Most of my work lives in two
+worlds: production software with real users — Peaksy and CourtHub at
+Symph, point-of-sale systems running in actual shops — and agentic AI,
+where I've ranked top-64 of 1,920+ teams in the Reply AI Agent Challenge
+and reached the finals of two other global hackathons.
+
+What ties it together is how I build: small, legible systems; strict
+types; interfaces that respond instantly. I'd rather ship one thing
+that holds up under inspection than five that don't.
 
 Currently open to opportunities →
 ```
 
-Also fixes the pre-existing `structured\nsoftware.My work` missing-space bug by replacing the whole paragraph.
+Notes:
+- Two short paragraphs, not one dense block — matches bryllim's rhythm and the site's editorial feel.
+- "Point-of-sale systems running in actual shops" is backed by `Rayn-Motoparts-POS` and the two Coffito repos — real, differentiated proof most student portfolios can't claim. Confirm with Kent these are genuinely deployed for real businesses before shipping the line; if not, soften to "point-of-sale systems built for local businesses."
+- The second paragraph is the About section's job now: the hero says *what*, the stats say *how well*, About says *how* — no overlap, no repetition.
+- Keep the existing "Currently open to opportunities →" mailto link exactly as-is.
 
-### 1.3 — Add a mono micro-label above the hero stats row
+### 1.3 — Mono micro-label above the hero stats row
 
-In `hero.tsx`, above the `heroStats.map(...)` grid, add a small dimmed label so first-time visitors know what the numbers mean before reading them:
+In `hero.tsx`, immediately above the `heroStats.map(...)` grid, add:
 
 ```tsx
 <p className="section-label !mb-0">Proven under pressure</p>
-```//placed just before the stats grid, reusing the existing `.section-label` utility class for consistency.
+```
+
+Reuses the existing `.section-label` utility for consistency; tells first-time visitors what the numbers mean before they read them.
 
 ### 1.4 — One-line framing sentence per section
 
-Add a single intro sentence under each section label, matching the bryllim pattern ("Six years building across...", "Products and platforms I've designed and shipped..."). Keep these in `text-sm text-muted-foreground`, positioned between the `section-label` and the section content:
+Add a single intro sentence under each section label (`text-sm text-muted-foreground`, between the `section-label` and the content):
 
-| Section | Suggested framing line |
+| Section | Framing line |
 |---|---|
 | Projects | "AI systems, SaaS products, and client builds — ranked and shipped, not just prototyped." |
 | Hackathons | "Competing against thousands of teams to stress-test what I build." |
 | Experience | "Shipping production software at Symph while competing in global AI hackathons on the side." |
 | Skills | "The tools I reach for across AI engineering, full-stack development, and infrastructure." |
-| Contact | *(keep as-is — the existing "Let's build something." headline already serves this purpose)* |
+| Contact | *(keep as-is — "Let's build something." already serves this purpose)* |
 
-### 1.5 — Checklist
+### 1.5 — `src/lib/site.ts` description
 
-- [ ] Hero sub-headline replaced, no orphaned generic phrasing remains
-- [ ] About paragraph replaced, names Symph/Peaksy/CourtHub/hackathon rank explicitly
-- [ ] Missing-space typo confirmed fixed
-- [ ] Mono label added above hero stats row
-- [ ] One-line framing sentence added to Projects, Hackathons, Experience, Skills sections
-- [ ] Full proofread pass — no leftover corporate jargon ("drive value," "leverage," "synergize," "scalable solutions")
-- [ ] `npm run build` still passes (text-only change, should be a formality)
+Update `siteConfig.description` to match the new positioning (this feeds `<meta description>`, OG, and Twitter cards):
+
+```
+Full-stack developer and AI engineer building agentic systems and
+production software — typed end to end, measured before shipped.
+Top-64 of 1,920+ teams, Reply AI Agent Challenge.
+```
+
+(Trim to ≤160 chars for the meta description if needed.)
+
+### 1.6 — Checklist
+
+- [ ] Hero sub-line replaced with the two-line craft statement; no generic phrasing remains
+- [ ] About replaced: names Symph/Peaksy/CourtHub, POS work, hackathon rank; POS claim verified with Kent
+- [ ] `software.My work` missing-space typo confirmed gone
+- [ ] Mono label added above hero stats
+- [ ] Framing sentences added to Projects, Hackathons, Experience, Skills
+- [ ] `siteConfig.description` updated and ≤160 chars
+- [ ] Proofread pass — zero corporate jargon ("drive value," "leverage," "scalable solutions," "synergize")
+- [ ] `npm run build` passes
 
 ---
 
-## Phase 2 — Progressive Disclosure Structure
+## Phase 2 — Sidebar Shell Layout (New)
 
-> **Goal:** Apply the single biggest structural idea from `portfolio_analysis.md` §1 — *"one scrollable homepage that previews deep content, backed by dedicated full pages"* — to the three sections that don't have it yet: **Experience, Skills/Stack, and Hackathons**. Projects already does this correctly; use it as the reference implementation.
+> **Goal:** Replace the sticky top navbar with a fixed left sidebar shell — bryllim's most recognizable structural move — but built as **Kent's own version**, not a clone. The differentiators are spelled out in 2.2.
 >
-> **Model:** `composer-2.5` (primary) — this is repeatable structural work (new routes + condensing existing components) that composer excels at. `gpt-5.3-codex` as an alternative if you want extra rigor on the routing/type-safety details.
-> **Skills:** `nextjs` (static routes, metadata per page), `shadcn` (reusing Card/Badge), `react-best-practices` (component extraction without duplication)
-> **Risk:** Medium — touches routing and requires careful component extraction to avoid duplicating markup between homepage-condensed and full-page versions.
+> **Model:** `gpt-5.5-medium`. **Skills:** `nextjs` (layout composition, server/client boundary), `shadcn` (Sheet reuse for mobile), `react-best-practices`.
+> **Risk:** **Highest in the plan** — this is a layout-shell change touching every page. CLS, LCP, and keyboard-order regressions are all possible if done carelessly. The Lighthouse guardrails in 2.6 are mandatory, not optional.
 
-### 2.1 — New routes to create
+### 2.1 — What bryllim actually does (from the Jul 3 scrape of the live HTML)
 
-```
-src/app/experience/page.tsx     ← full experience timeline (currently the only place it lives is the homepage)
-src/app/stack/page.tsx          ← full skills/stack grouped by category (renamed "stack" to match bryllim's clearer naming, but keep the "Skills" label on homepage nav if preferred)
-src/app/hackathons/page.tsx     ← full hackathon history, including non-highlighted "participant" entries with fuller descriptions
-```
-
-Each new page follows the same shell pattern as `src/app/projects/page.tsx`: a page-level heading, the framing sentence from Phase 1, then the full content — no homepage-specific truncation.
-
-### 2.2 — Extract shared components (avoid duplication)
-
-Right now `Experience`, `Skills`, and `Hackathons` are single monolithic homepage-only components. Split each into:
+For reference — this is the pattern being adapted, so the differences in 2.2 are deliberate rather than accidental:
 
 ```
-src/components/experience/experience-timeline.tsx   ← the actual rendering logic (accepts a data array + optional `limit` prop)
-src/components/skills/skills-grid.tsx                ← same pattern
-src/components/hackathons/hackathons-list.tsx        ← same pattern
+<nav class="fixed inset-y-0 left-0 z-50 hidden w-56 flex-col
+            border-r border-gray-200 bg-white px-7 py-8 lg:flex">
+  ├─ Name (pixel font, links home)
+  ├─ Nav groups in font-mono text-[13px], separated by h-px dividers:
+  │    group 1: Shop / Blog / Gear / Resources        (with inline SVG icons)
+  │    group 2: Collabs / Consulting                  (with icons)
+  │    group 3: Projects / Experience / Stack /
+  │             Certifications / Recommendations /
+  │             Affiliations                          (no icons)
+  └─ Pinned bottom: "Ask anything  Alt+K" button + email link
+Content: offset via lg:pl-56, inner column max-w-3xl
+Mobile (<lg): sticky top bar (name + hamburger) → full-screen overlay menu
 ```
 
-Then:
-- `src/components/sections/experience.tsx` (homepage) → renders `<ExperienceTimeline data={experience} limit={2} />` + a "full history →" link to `/experience`
-- `src/components/sections/skills.tsx` (homepage) → renders `<SkillsGrid data={skills.slice(0, 4)} />` + "view all →" link to `/stack` (bryllim shows a condensed tag row on homepage, full categories on `/stack`)
-- `src/components/sections/hackathons.tsx` (homepage) → keeps the 3 highlighted cards in full (these are the differentiator, don't truncate them), but moves the "participant" list to a "full track record →" link to `/hackathons` instead of rendering inline
+### 2.2 — Kent's version: same skeleton, four deliberate differences
 
-### 2.3 — "View all" link pattern (consistent across sections)
+| Bryllim | Kent (why it's different) |
+|---|---|
+| Static link list — no indication of where you are on the page | **Scroll-spy rail**: on the homepage, sidebar items are the numbered section labels (`01 / about`, `02 / projects`, …) with a live active state (accent-ai text + a small horizontal tick that slides between items via IntersectionObserver). The sidebar becomes an *instrument that tracks reading position* — bryllim's doesn't do this, and it's perfectly on-brand for the "signal-forward, technical" identity. |
+| Icons on half the links | **No icons.** Kent's numbered mono labels (`01 /`, `02 /`) *are* the visual system — adding icons would dilute the editorial identity and read as bryllim-derivative. |
+| Light-only, gray palette | Full **dark/light theming** via existing tokens (`bg-background`, `border-border`), with the ThemeToggle relocated into the sidebar footer. |
+| "Ask anything" AI bar hint at bottom | **`⌘K` command palette hint** at bottom (wired in Phase 5) — navigation tool, not chatbot (see Phase 5 scope). |
+| Sidebar footer: email only | Sidebar footer: **availability status line** (`● open to opportunities` with a small pulsing accent dot honoring `prefers-reduced-motion`), then ⌘K hint, ThemeToggle, and mono social links (github / linkedin / email — mirroring bryllim's lowercase mono style but with Kent's links). |
 
-Reuse the exact pattern already established in `projects.tsx`:
+### 2.3 — Implementation
+
+```
+src/components/layout/sidebar.tsx        ← new: the fixed rail (server component wrapper)
+src/components/layout/sidebar-nav.tsx    ← new: client component — scroll-spy + active state only
+src/components/layout/mobile-topbar.tsx  ← new: <lg sticky top bar (adapts existing navbar)
+src/components/layout/navbar.tsx         ← retired after migration (delete once sidebar ships)
+src/app/layout.tsx                       ← shell change (see below)
+```
+
+**Layout shell (`layout.tsx`):**
 
 ```tsx
-<div className="mb-10 flex items-end justify-between gap-4">
-  <h2 className="section-label">04 / experience</h2>
-  <Link href="/experience" className="group inline-flex shrink-0 items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-accent-ai">
-    full history
-    <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-  </Link>
+<div className="flex min-h-screen flex-col">
+  <Sidebar />        {/* hidden lg:flex — fixed inset-y-0 left-0 w-56 */}
+  <MobileTopbar />   {/* lg:hidden — reuses existing Sheet menu */}
+  <main id="main" className="flex-1 lg:pl-56">
+    {children}
+  </main>
+  <Footer className="lg:pl-56" />
 </div>
 ```
 
-Label text per section (matches bryllim's varied phrasing rather than repeating "view all" everywhere): `full history` (Experience), `full track record` (Hackathons), `view all` (Skills/Stack) — small detail but avoids the site reading as templated.
+**Sidebar contents (top → bottom):**
 
-### 2.4 — Navbar update
+1. **Identity block:** `Kent Colina` in `font-display` (links `/`), with `Full-Stack · AI Engineer` beneath in `font-mono text-xs text-muted-foreground`.
+2. **Section rail (homepage):** the numbered labels as anchor links. On non-home routes this group renders the same labels as links back to `/#about` etc. — one component, `usePathname()` decides link targets (same pattern the current navbar already uses).
+3. **`h-px bg-border` divider** (bryllim's grouping device — keep this, it's generic).
+4. **Pages group:** `projects`, `experience`, `stack`, `hackathons` → the deep pages from Phase 3. Lowercase mono, `text-[13px]`, muted → foreground on hover, accent-ai when the route is active.
+5. **Pinned footer:** availability line, ⌘K hint (placeholder `<kbd>` until Phase 5), ThemeToggle, social links.
 
-Update `navItems` in `navbar.tsx` so each entry's `page` property points to the new dedicated route (currently only `Projects` has a `page` fallback for non-home routes):
+**Behavioral requirements:**
 
-```ts
-const navItems = [
-  { label: "About", hash: "#about" },
-  { label: "Projects", hash: "#projects", page: "/projects" },
-  { label: "Hackathons", hash: "#hackathons", page: "/hackathons" },
-  { label: "Experience", hash: "#experience", page: "/experience" },
-  { label: "Skills", hash: "#skills", page: "/stack" },
-] as const;
-```
+- Sidebar is a **server component**; only `sidebar-nav.tsx` (scroll-spy) is a client component. Keeps the shell in the static HTML payload — no hydration flash, no CLS.
+- Scroll-spy via a single `IntersectionObserver` watching the seven `<section>` elements; no scroll-event listeners (main-thread cost, TBT risk).
+- `<nav aria-label="Main navigation">`, active item gets `aria-current="true"` / `aria-current="page"`.
+- Content column: keep the existing `max-w-5xl` inner container; verify hero/section paddings still breathe with the effective viewport narrowed by 224px at `lg`. If `lg` (1024px) feels cramped with only ~800px of content, move the sidebar breakpoint to `xl` — decide by looking, not by guessing.
+- Mobile topbar reuses the existing Sheet component and nav-item logic — don't rebuild what works; restyle to match (name left, theme toggle + hamburger right).
+- The skip-link (`#main`) must remain the first focusable element; sidebar nav comes after it in DOM/tab order.
 
-### 2.5 — Sitemap update (`src/app/sitemap.ts`)
+### 2.4 — Footer reconciliation
 
-Add the three new static routes alongside the existing project routes.
+The existing bottom `Footer` overlaps with the new sidebar footer (socials, email). Slim the page footer to a single mono line (`© 2026 Kent Colina — built with Next.js`, plus a source-repo link if desired) and let the sidebar own the persistent contact/social surface. Don't show the same four links twice on every viewport.
 
-### 2.6 — Checklist
+### 2.5 — Checklist
 
-- [ ] `/experience`, `/stack`, `/hackathons` all render full content with correct metadata (`<title>`, `<meta description>`)
-- [ ] Homepage sections are visibly condensed compared to before (Experience shows 2 most recent roles + link; Skills shows a subset + link; Hackathons keeps highlighted cards, moves participant list off-homepage)
-- [ ] No component logic duplicated between homepage and full-page versions — both consume the same extracted component
-- [ ] Navbar links resolve correctly from every page (not just home)
-- [ ] Sitemap includes new routes
-- [ ] `npm run build` passes, `generateStaticParams`/static rendering confirmed for new routes
+- [ ] Sidebar renders fixed-left at `lg`+ on every route; content offset correct; no horizontal scroll at any width
+- [ ] Scroll-spy active state tracks all homepage sections correctly (including near-bottom sections that never reach viewport top — tune observer thresholds/rootMargin)
+- [ ] Mobile topbar + sheet menu works; old navbar deleted; no dead imports
+- [ ] Theme toggle works from sidebar (desktop) and topbar (mobile)
+- [ ] Keyboard order: skip-link → sidebar nav → main content; `aria-current` set; focus rings visible on all sidebar links
+- [ ] Sidebar identical between server HTML and hydrated client (no flash/CLS — verify with DevTools "Layout Shift Regions")
+- [ ] Side-by-side screenshot comparison vs `.firecrawl/bryllim-screenshot.png` — reads as "same genre, clearly different site" (numbered rail, theming, no icons, availability line)
+- [ ] `npm run build` passes; Lighthouse spot-check: CLS = 0, LCP unchanged (hero heading is still LCP element and must not be delayed by the shell)
 
 ---
 
-## Phase 3 — Credibility & Proof Layer
+## Phase 3 — Progressive Disclosure Structure
 
-> **Goal:** Convert claims into checkable facts, per the #1 and #2 highest-leverage findings in `portfolio_analysis.md` §3 ("numbers everywhere" and "third-party validation over self-description").
+> **Goal:** Apply "homepage previews deep content, backed by dedicated full pages" to the three sections that don't have it yet: **Experience, Skills/Stack, Hackathons**. Projects already does this — use it as the reference implementation. The Phase 2 sidebar's "pages group" links directly to these routes.
 >
-> **Model:** `composer-2.5` (primary) for the component/data work. `claude-4.5-sonnet-thinking` as an alternative if you want help drafting the actual recommendation-request messages or wordsmithing new bullet copy.
-> **Skills:** `shadcn` (Card/Avatar for testimonials), `react-best-practices`
-> **Risk:** Low-medium — mostly additive (new section + data), plus a content-gathering step that depends on things outside the codebase (asking people for quotes, finding verify links).
+> **Model:** `gpt-5.5-medium`. **Skills:** `nextjs`, `shadcn`, `react-best-practices`. **Risk:** Medium — routing + careful component extraction.
 
-### 3.1 — Add "Verify" links to hackathon results
+### 3.1 — New routes
 
-Extend the `Hackathon` type (already has an optional `href` field, currently unused) and wire it into the UI:
+```
+src/app/experience/page.tsx     ← full experience timeline
+src/app/stack/page.tsx          ← full skills grouped by category ("stack" naming matches sidebar; keep "Skills" label on homepage section)
+src/app/hackathons/page.tsx     ← full hackathon history incl. "participant" entries
+```
+
+Each follows the shell pattern of `src/app/projects/page.tsx`: page heading, the Phase 1 framing sentence, full content. All fully static, each with its own `metadata` (`title`, `description`).
+
+### 3.2 — Extract shared components (no duplication)
+
+```
+src/components/experience/experience-timeline.tsx   ← rendering logic, accepts data + optional `limit`
+src/components/skills/skills-grid.tsx               ← same pattern
+src/components/hackathons/hackathons-list.tsx       ← same pattern
+```
+
+Homepage sections then become thin wrappers:
+- `sections/experience.tsx` → `<ExperienceTimeline data={experience} limit={2} />` + "full history →" link
+- `sections/skills.tsx` → `<SkillsGrid data={skills.slice(0, 4)} />` + "view all →" link
+- `sections/hackathons.tsx` → keep the 3 highlighted cards in full (they're the differentiator), move the "participant" list to `/hackathons` behind a "full track record →" link
+
+### 3.3 — "View all" link pattern
+
+Reuse the exact header pattern from `projects.tsx` (label left, arrow-link right). Vary the link text per section — `full history` / `full track record` / `view all` — so the site doesn't read as templated.
+
+### 3.4 — Sidebar + sitemap updates
+
+- Confirm the Phase 2 sidebar "pages group" routes now all resolve (`/projects`, `/experience`, `/stack`, `/hackathons`) with correct active-route highlighting.
+- Add the three new routes to `src/app/sitemap.ts`.
+
+### 3.5 — Checklist
+
+- [ ] `/experience`, `/stack`, `/hackathons` render full content with correct metadata
+- [ ] Homepage sections visibly condensed; no logic duplicated between homepage and full-page versions
+- [ ] Sidebar links resolve and highlight correctly from every page
+- [ ] Sitemap includes new routes
+- [ ] `npm run build` passes; new routes confirmed static (check build output — `○` not `ƒ`)
+
+---
+
+## Phase 4 — Credibility & Proof Layer
+
+> **Goal:** Convert claims into checkable facts ("numbers everywhere" + "third-party validation over self-description" — the two highest-leverage findings in the teardown).
+>
+> **Model:** `gpt-5.5-medium`. **Skills:** `shadcn`, `react-best-practices`. **Risk:** Low-medium — mostly additive, plus a content-gathering step outside the codebase.
+
+### 4.1 — "Verify" links on hackathon results
+
+The `Hackathon` type already has an unused optional `href`. Wire it into the UI:
 
 ```tsx
 {entry.href ? (
-  <a href={entry.href} target="_blank" rel="noopener noreferrer" className="...">
+  <a href={entry.href} target="_blank" rel="noopener noreferrer">
     Verify ↗
   </a>
 ) : null}
 ```
 
-Populate `href` in `src/data/hackathons.ts` with links to public leaderboards, LinkedIn posts announcing results, or certificates — whatever is publicly checkable for each entry. If a given hackathon has no public proof, leave `href` undefined rather than fabricating a link — an absent "Verify" link is honest; a broken one is worse than none.
+Populate `href` in `src/data/hackathons.ts` with public leaderboards, result-announcement LinkedIn posts, or certificates. **If no public proof exists for an entry, leave `href` undefined** — an absent Verify link is honest; a broken one is worse than none.
 
-### 3.2 — Rewrite Experience bullets to end in a metric
+### 4.2 — Experience bullets end in a metric
 
-Audit every bullet in `src/data/experience.ts` against the bryllim pattern (`portfolio_analysis.md` §2, "Experience"). Every bullet should end in a number, scope, or named outcome where one honestly exists — e.g.:
+Audit every bullet in `src/data/experience.ts`. Each should end in a number, scope, or named outcome **where one honestly exists** (team size, user counts, request volume, % improvements). Do not invent numbers — this phase is about surfacing real metrics that aren't stated yet, not manufacturing precision.
 
-- Before: *"Built and improved full-stack features across auth, profiles, search, bookings, payments, and chat."*
-- After (only if true, adjust to Kent's actual scope): *"Built and shipped full-stack features across 6 core product areas (auth, profiles, search, bookings, payments, chat) in a monorepo used by [X] active users."*
+### 4.3 — Recommendations section (optional, high-leverage)
 
-Do not invent numbers — if a metric isn't known/true, keep the qualitative bullet as-is rather than fabricating precision. This phase is about *finding* real metrics that already exist but aren't stated yet (team size, request volume, latency, user counts, % improvements), not manufacturing false ones.
+Content-gathering first, code second:
 
-### 3.3 — New: Recommendations section (optional but high-leverage)
+1. Ask 1–2 people for a short quote (Symph teammate/manager, CTU professor, hackathon teammate).
+2. Once real text exists: `src/data/recommendations.ts` (`{ name, title, quote }[]`) + `src/components/sections/recommendations.tsx` (simple card list matching existing Card usage). Placement: between Experience and Skills, or before Contact — test both.
 
-Per `portfolio_analysis.md` §4–5: even one real quote adds outsized trust. This is a **content-gathering task first, code task second**:
+**If no quotes arrive in time, skip entirely** — never ship placeholder testimonials. Backlog it.
 
-1. Ask 1–2 people for a short quote: a Symph teammate/manager, or a CTU professor/hackathon teammate.
-2. Once text exists, build:
+### 4.4 — GitHub proof-of-work strip (optional, small)
 
-```
-src/data/recommendations.ts        ← { name, title, quote }[]
-src/components/sections/recommendations.tsx   ← simple card list, styled like existing Card usage
-```
+Since the GitHub audit (Section 0) surfaced real breadth, consider a one-line mono strip in About or the sidebar footer: `30 public repos · TypeScript & Python · github.com/betaTrident ↗`. Static text + link — no live API calls, no embeds, zero performance cost. Skip if it crowds the layout.
 
-Placement: between Experience and Skills, or as its own homepage section before Contact — test both and pick whichever doesn't feel like it interrupts the "systems → skills → contact" flow.
+### 4.5 — Category tag audit
 
-**If no quotes are available in time:** skip this sub-phase entirely rather than shipping placeholder/fake testimonials. Move it to a post-launch backlog item.
+Audit `content/projects/*.mdx` frontmatter for consistent category values (`AI System`, `SaaS Product`, `Client Build`, `Hackathon Build`) — no ad-hoc labels.
 
-### 3.4 — Category tag audit on project cards
+### 4.6 — Checklist
 
-Already implemented (`project.category`), but audit the actual values in `content/projects/*.mdx` frontmatter to confirm consistent, meaningful categories (`AI System`, `SaaS Product`, `Client Build`, `Hackathon Build`) rather than a mix of ad-hoc labels — this was the plan's intent but worth a quick pass to verify against what's actually in the 11 MDX files.
-
-### 3.5 — Checklist
-
-- [ ] `Verify` links render for hackathons that have real public proof; absent for those that don't (no fabricated links)
-- [ ] At least a pass has been made over Experience bullets checking for missing-but-true metrics
-- [ ] Recommendations section either shipped with 1+ real quotes, or explicitly deferred to backlog (not shipped with fake content)
-- [ ] Project category tags audited for consistency across all 11 MDX files
+- [ ] Verify links render only where real public proof exists
+- [ ] Experience bullets audited for missing-but-true metrics
+- [ ] Recommendations shipped with real quotes, or explicitly deferred
+- [ ] Category tags consistent across all 11 MDX files
 
 ---
 
-## Phase 4 — Signature Interaction (The Unique Differentiator)
+## Phase 5 — Signature Interaction: ⌘K Command Palette
 
-> **Goal:** Per `portfolio_analysis.md` §3.6 and §4 — bryllim's site has one genuinely memorable interactive moment (AI command bar + typing game). Kent's site needs its **own** equivalent: something that fits an AI/agentic-engineer identity, costs little in complexity/performance, and doesn't feel like a copy.
+> **Goal:** One genuinely memorable interactive moment that fits an AI-engineer identity without copying bryllim's AI chat bar. The sidebar's pinned `⌘K` hint (Phase 2) becomes live here.
 >
-> **Model:** `claude-4.5-sonnet-thinking` (primary) — this is the one phase where the *design decision itself* (not just the code) matters most; a stronger reasoning model helps avoid building something gimmicky or off-brand. `composer-2.5` as fallback once the interaction spec below is locked in — at that point it's mostly mechanical implementation.
-> **Skills:** `shadcn` (the `command.tsx` component is already installed in this codebase — confirmed in `src/components/ui/command.tsx`), `react-best-practices`
-> **Risk:** Medium — this is the most "creative" phase; scope it tightly so it doesn't become a rabbit hole.
+> **Model:** `gpt-5.5-medium`. **Skills:** `shadcn` (`Command` — already installed at `src/components/ui/command.tsx`, zero new dependencies), `react-best-practices`.
+> **Risk:** Medium — creative scope; keep it tight.
 
-### 4.1 — Recommended signature element: **⌘K Command Palette Navigation**
+### 5.1 — Scope for v1
 
-This is the single best fit because:
-- The `Command` shadcn component is **already installed** in this project (`src/components/ui/command.tsx`) — zero new dependencies.
-- It's the single most "AI-engineer-coded" interaction pattern (mirrors tools like Linear, Raycast, Vercel dashboard) — reinforces the "signal-forward, technical" personality from `PORTFOLIO_PLAN.md` without being a gimmick.
-- It's genuinely *useful*, not just decorative — visitors can jump to any section/project/page instantly. Bryllim's AI chat bar is a novelty; this is a novelty that's also more functional.
-- It's cheap to build well (a `<CommandDialog>` wired to `next/navigation`, triggered by `⌘K` / `Ctrl+K` and a small visible hint button) and has near-zero performance cost (client component, lazy-mounted).
-
-**Scope for v1 (keep tight):**
 ```
 src/components/command-menu.tsx
 ```
-- Opens on `⌘K` / `Ctrl+K` keyboard shortcut (global listener in a client component, mounted once in `layout.tsx`)
-- Lists: all homepage sections (jump-scroll on home), all top-level pages (`/projects`, `/experience`, `/stack`, `/hackathons`), and optionally all individual projects (deep-link to `/projects/[slug]`)
-- Small persistent trigger hint in the navbar (e.g., a `⌘K` kbd badge next to the theme toggle) so visitors discover it without needing to already know the shortcut
-- Respects the existing design tokens — mono font for the `⌘K` hint, same border/background treatment as other shadcn components already in use
 
-**Explicitly out of scope for v1** (avoid scope creep into bryllim's exact feature): no AI-powered natural-language answering, no chat interface, no "ask anything" text field. This is pure fast-navigation, not a chatbot. If Kent wants an actual AI Q&A feature later, that's a separate, much larger project-worthy phase on its own.
+- Opens on `⌘K` / `Ctrl+K` (single global listener, client component mounted once in `layout.tsx`)
+- Lists: homepage sections (jump-scroll on home, route + hash elsewhere), top-level pages (`/projects`, `/experience`, `/stack`, `/hackathons`), and all 11 individual projects (deep-link to `/projects/[slug]`)
+- Triggered from the sidebar footer `⌘K` hint (desktop) and a small button in the mobile topbar (touch devices have no ⌘K)
+- **Lazy-load the dialog contents** (`next/dynamic`, load on first open or on `requestIdleCallback`) so it adds nothing to initial JS execution — this is what keeps Lighthouse TBT at zero cost
+- Design tokens only: mono font for the `<kbd>` hint, existing border/background treatments
 
-### 4.2 — Alternative options considered (documented for reference, not chosen)
+**Explicitly out of scope:** AI-powered Q&A, chat interface, "ask anything" free-text field. Pure fast navigation. (Why this beats copying bryllim's AI bar: it's *useful* rather than a novelty, needs no backend/LLM cost, and reinforces the Linear/Raycast/Vercel power-user aesthetic that matches the site's identity.)
+
+### 5.2 — Rejected alternatives (for the record)
 
 | Option | Verdict |
 |---|---|
-| Live GitHub contribution graph embed | Good, low-effort, but purely decorative — no interaction. Could be a nice *addition* to Phase 3's credibility layer instead (embed under Skills/Stack or About), not a phase-4 "signature" moment on its own. |
-| Custom cursor / cyan trail effect | Purely cosmetic, adds JS overhead, contradicts "signal-forward, minimal" personality (`PORTFOLIO_PLAN.md` explicitly says no gimmicks). Rejected. |
-| Terminal-style boot/typing intro on hero load | Fun, but delays LCP/first paint of the hero heading — directly conflicts with the Lighthouse-100 performance requirement already achieved in Phase 9 of v1. Rejected. |
-| AI chat / "ask anything" bar (bryllim's actual feature) | Would require a real backend (LLM API calls, cost, latency) to not feel fake — too large in scope for this plan, and risks feeling like a direct copy rather than an authentic differentiator. Deferred to a future, dedicated project if desired. |
+| Live GitHub contribution graph embed | Decorative, third-party request cost — the static strip in 4.4 covers this cheaper. |
+| Custom cursor / trail effect | Contradicts "signal-forward, minimal." Rejected. |
+| Terminal-style typing intro on hero | Delays LCP — direct conflict with Lighthouse 100. Rejected. |
+| AI chat bar (bryllim's feature) | Needs a real backend to not feel fake; reads as a direct copy. Deferred indefinitely. |
 
-### 4.3 — Checklist
+### 5.3 — Checklist
 
-- [ ] `⌘K`/`Ctrl+K` opens the command palette from any page
-- [ ] All sections/pages/projects are reachable and correctly navigate/scroll
-- [ ] Visible hint badge exists so the feature is discoverable without prior knowledge
-- [ ] Fully keyboard-accessible (arrow keys, enter, escape) — shadcn's `Command` gives this for free, verify it wasn't broken by customization
-- [ ] No layout shift or performance regression (`Lighthouse` re-check after this phase, since it's the highest-risk phase for scope creep)
-- [ ] Works correctly with `useReducedMotion` / respects `prefers-reduced-motion` for any transition animation on open/close
-
----
-
-## Phase 5 — Content Completion & Asset Polish
-
-> **Goal:** Everything data-driven is actually filled in correctly, consistent, and free of leftover scaffolding cruft.
->
-> **Model:** `composer-2.5-fast` (primary) — this is population/cleanup work, not architecture, so the faster/cheaper model is the right call. `composer-2.5` if any of the audits below surface something that needs real fixing rather than filling in.
-> **Skills:** `verification-before-completion` (confirm every claim added in this phase is real before shipping)
-> **Risk:** Low.
-
-### 5.1 — Remove scaffolding cruft
-
-Default Next.js/shadcn starter assets still present in `public/` are dead weight and slightly undercut the "polished, custom" feel:
-
-```
-public/file.svg
-public/globe.svg
-public/next.svg
-public/vercel.svg
-public/window.svg
-```
-Delete any that aren't actually referenced anywhere (grep for each filename first to confirm).
-
-### 5.2 — Asset audit
-
-- [ ] Confirm `public/colinaPortrait.jpg` is used somewhere intentional (currently the Hero has "no images" per the design plan — decide: either use the portrait somewhere appropriate like an About/Contact accent, or remove it if it's unused, to avoid dead files)
-- [ ] Confirm `public/resume.pdf` is the latest version of the CV
-- [ ] Generate/confirm a real favicon reflecting Kent's initials or a simple mark (not the default Next.js icon)
-- [ ] Verify `opengraph-image.tsx` output actually reflects the current hero copy after Phase 1's rewrite (OG images are often auto-generated from title/description constants — check `siteConfig.description` still matches the new positioning)
-
-### 5.3 — Data completeness pass
-
-- [ ] `src/data/hackathons.ts` — all entries have accurate `year`, `result`, and (per Phase 3) `href` where verifiable
-- [ ] `src/data/experience.ts` — bullets updated per Phase 3's metric audit
-- [ ] `src/data/skills.ts` — categories match what's genuinely used across the 11 shipped projects (don't list a technology that appears nowhere in the actual project case studies — internal consistency matters for credibility)
-- [ ] `src/lib/site.ts` — `description` field updated to match the new hero/about positioning from Phase 1
-- [ ] All 11 `content/projects/*.mdx` files reviewed for consistent tone (matches the new About voice) and at least one metric/outcome per project where one is real
-
-### 5.4 — Checklist
-
-- [ ] No unused default framework assets remain in `public/`
-- [ ] Favicon reflects Kent's actual identity, not a framework default
-- [ ] `siteConfig.description` and OG image output match Phase 1's rewritten positioning
-- [ ] Every data file audited and internally consistent with the shipped case studies
+- [ ] `⌘K`/`Ctrl+K` opens the palette from any page; sidebar hint and mobile button both trigger it
+- [ ] All sections/pages/projects reachable; navigation + scroll behavior correct from home and non-home routes
+- [ ] Fully keyboard-accessible (arrows, enter, escape); focus returns to trigger on close
+- [ ] Respects `prefers-reduced-motion` for open/close transitions
+- [ ] Bundle check: palette code is not in the initial chunk (verify in build output / network tab)
+- [ ] Lighthouse re-check after this phase — no TBT/LCP regression
 
 ---
 
-## Phase 6 — QA, Accessibility & Performance Hardening
+## Phase 6 — Content Completion & Asset Polish
 
-> **Goal:** Confirm the cumulative changes from Phases 1–5 haven't regressed the Lighthouse-100 baseline already achieved in v1, and do a final holistic review pass.
+> **Goal:** Everything data-driven is filled in, consistent, and free of scaffolding cruft.
 >
-> **Model:** `composer-2.5` (primary) for fixing anything found. `gpt-5.3-codex` as an alternative for the audit pass itself if you want a second, more meticulous set of eyes before merging.
-> **Skills:** `nextjs`, `react-best-practices`, `verification-before-completion`
-> **Risk:** Low if Phases 1–5 followed their checklists; this phase exists specifically to catch anything that slipped through.
+> **Model:** `gpt-5.5-medium`. **Skills:** `verification-before-completion`. **Risk:** Low.
 
-### 6.1 — Re-run the full Lighthouse checklist from `PORTFOLIO_PLAN.md` §9
+### 6.1 — Remove scaffolding cruft
 
-Specifically re-verify what Phase 2 (new routes) and Phase 4 (command palette) are most likely to have affected:
-- [ ] New routes (`/experience`, `/stack`, `/hackathons`) are fully static (`generateStaticParams` / default static rendering, no unintended SSR)
-- [ ] Command palette client component doesn't block LCP or add meaningful TBT (test with it removed vs. present)
-- [ ] No new console errors/warnings introduced by any of Phases 1–5
-- [ ] All new interactive elements (Verify links, command palette, recommendations cards) have correct `aria-label`s and keyboard focus states
-- [ ] Color contrast holds for any new text (framing sentences, Verify links) against both light and dark theme tokens
+Grep for references first, then delete unused starter assets:
 
-### 6.2 — Cross-device / responsive pass
+```
+public/file.svg  public/globe.svg  public/next.svg  public/vercel.svg  public/window.svg
+```
 
-- [ ] All 3 new full pages (`/experience`, `/stack`, `/hackathons`) tested at mobile, tablet, and desktop widths
-- [ ] Command palette usable on touch devices (trigger button, not just keyboard shortcut)
-- [ ] No horizontal scroll introduced anywhere
+### 6.2 — Asset audit
 
-### 6.3 — Final holistic review
+- [ ] `public/colinaPortrait.jpg` — either use intentionally (About/Contact accent) or delete; no dead files
+- [ ] `public/resume.pdf` is the current CV — and its content matches the new site copy (same positioning, same metrics)
+- [ ] Real favicon (Kent's initials or a simple mark), not the framework default
+- [ ] `opengraph-image.tsx` output reflects the Phase 1 copy (check it reads `siteConfig` values, not stale literals)
 
-- [ ] Read the entire homepage top-to-bottom as a first-time visitor would — does it read as one coherent story now (name → proof → work → competitive record → career → skills → contact), or does anything feel disjointed after all the incremental changes?
-- [ ] Confirm nothing from bryllim.com was copied in a way that would look derivative if the two sites were compared side-by-side (the goal was inspiration, not imitation — spot-check against `portfolio_analysis.md` §4, "What NOT to Copy")
-- [ ] `npm run build` clean, zero TypeScript errors, zero lint warnings
-- [ ] Optional: run the `code-reviewer` subagent or `security-review` skill for a final pass if any new external links/data fetching was introduced (e.g., GitHub contribution embed, if added)
+### 6.3 — Data completeness pass
 
-### 6.4 — Ship
+- [ ] `src/data/hackathons.ts` — accurate `year`, `result`, and Phase 4 `href`s
+- [ ] `src/data/experience.ts` — bullets per Phase 4 metric audit
+- [ ] `src/data/skills.ts` — categories match technologies actually used in the 11 case studies (internal consistency = credibility)
+- [ ] All 11 `content/projects/*.mdx` reviewed for tone consistency with the new About voice + at least one real metric each
+
+### 6.4 — Checklist
+
+- [ ] No unused framework assets in `public/`
+- [ ] Favicon, OG image, and meta description all reflect the v3 positioning
+- [ ] Every data file audited and internally consistent
+
+---
+
+## Phase 7 — QA, Accessibility & Lighthouse-100 Hardening
+
+> **Goal:** Confirm Phases 1–6 haven't regressed the Lighthouse-100 baseline, with special attention to the two structural changes (sidebar shell, command palette).
+>
+> **Model:** `gpt-5.5-medium`. **Skills:** `nextjs`, `react-best-practices`, `verification-before-completion`. **Risk:** Low if prior checklists were honored.
+
+### 7.1 — Lighthouse (run against production build: `npm run build && npm run start`, incognito, desktop + mobile presets)
+
+Target: **100 / 100 / 100 / 100** on every route (`/`, `/projects`, `/projects/[slug]` sample, `/experience`, `/stack`, `/hackathons`).
+
+- [ ] **Performance:** CLS = 0 on all routes (sidebar is the prime suspect — server-rendered shell, no hydration shift); LCP element is still the hero heading and unaffected by the shell; command palette absent from initial bundle; no scroll listeners (scroll-spy is IntersectionObserver-only)
+- [ ] **Accessibility:** skip-link first in tab order; `aria-current` on active sidebar items; all new interactive elements (Verify links, palette, sidebar links) keyboard-operable with visible focus; color contrast holds for framing sentences and muted sidebar text in **both** themes (muted-on-background at `text-[13px]` is exactly where contrast failures hide)
+- [ ] **Best Practices:** all external links `rel="noopener noreferrer"`; no console errors/warnings on any route
+- [ ] **SEO:** every route has unique title + description; sitemap complete; JSON-LD still valid
+
+### 7.2 — Cross-device pass
+
+- [ ] Every route at 360px, 768px, 1024px (sidebar breakpoint — the risky one), 1440px
+- [ ] Sidebar↔topbar breakpoint transition clean, no layout jump or double-nav flash
+- [ ] Palette usable on touch (button trigger); no horizontal scroll anywhere
+
+### 7.3 — Final holistic review
+
+- [ ] Read the homepage top-to-bottom as a first-time visitor: one coherent story (name → craft → proof → work → competitive record → career → skills → contact)?
+- [ ] Side-by-side with `.firecrawl/bryllim-screenshot.png`: same genre, unmistakably different site (numbered scroll-spy rail, dark theme, availability line, no icons, ⌘K-not-AI-bar)
+- [ ] `npm run build` clean — zero TS errors, zero lint warnings
+- [ ] Optional: `code-reviewer` subagent pass before merging
+
+### 7.4 — Ship
 
 ```bash
 npm run build
 git add -A
-git commit -m "feat: apply bryllim.com-inspired improvements — copy, progressive disclosure, credibility layer, command palette"
+git commit -m "feat: v3 — sidebar shell, craft-first copy, progressive disclosure, credibility layer, command palette"
 git push origin main
 ```
 
@@ -403,15 +479,14 @@ git push origin main
 
 ## Summary: What Makes This "Kent's Own" and Not a Bryllim Clone
 
-Per the user's requirement to stay "the same minimalistic theme/UI/design... but unique" — here's the explicit differentiation logic baked into this plan:
-
 | Bryllim has | Kent's site does instead |
 |---|---|
-| AI chat command bar (content Q&A) | ⌘K command **palette** (fast navigation) — same keyboard-power-user energy, functionally different, fits an early-career engineer's authentic scope better than faking an AI feature |
-| Live viewer count / community size | Nothing — Kent doesn't have that audience yet; faking it would read as hollow |
+| Fixed left sidebar, static links + icons, light-only | Fixed left sidebar with a **numbered scroll-spy rail** (live reading-position indicator), no icons, full dark/light theming, availability status line |
+| "Ask anything" AI chat bar (Alt+K) | ⌘K command **palette** — pure fast navigation, no backend, no fake AI |
+| Live viewer count / 200K+ community stats | Hackathon rank (`#64 / 1,920`) as the scroll-stopping number — real, verifiable, Kent's own |
 | 7-role LinkedIn timeline | Tight 2-role + hackathon-forward story — honest to actual career stage |
-| Typing-speed mini-game | Nothing — pure novelty with no connection to Kent's differentiator (hackathon performance already *is* the "prove it under pressure" moment) |
-| Recommendation from a government secretary | Real quotes from actual collaborators only, or none at all |
-| "200K+ community" stat | Hackathon rank (`#64 / 1,920`) as the equivalent proof-of-scale stat — different but structurally the same technique (a number that stops the scroll) |
+| App Store badges + press mentions | Verify links on hackathon results + POS systems running in real shops — proof appropriate to Kent's stage |
+| Recommendation from a government secretary | Real quotes from actual collaborators, or none at all |
+| Hero: "I build modern web & mobile apps…" | Hero: craft-first statement (typed end to end, measured before shipped) backed by a repo anyone can read |
 
-The throughline across every phase: borrow the **structural techniques** (progressive disclosure, metrics-first writing, verify links, one-line framing) because those are universal good-portfolio practices — but every piece of *content* and the *one signature interaction* is derived from what's actually true and distinctive about Kent, not ported over from Bryl's site.
+The throughline: borrow the **structural techniques** (sidebar shell, progressive disclosure, metrics-first writing, verify links, framing lines) because those are universal good-portfolio practices — but every piece of *content*, the *copy voice*, and the *signature interaction* is derived from what's actually true and distinctive about Kent.
