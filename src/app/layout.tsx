@@ -27,6 +27,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Kent Bryan Colina", url: siteConfig.url }],
   creator: "Kent Bryan Colina",
+  alternates: {
+    canonical: siteConfig.url,
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -39,11 +42,18 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${siteConfig.name} — ${siteConfig.title}`,
     description: siteConfig.description,
+    creator: "@kentcolina",
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true },
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 

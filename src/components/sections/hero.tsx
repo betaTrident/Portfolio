@@ -1,55 +1,36 @@
-"use client";
-
 import {
   ArrowUpRight,
   Download,
   Mail,
 } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
 import { buttonVariants } from "@/components/ui/button";
 import { heroStats } from "@/data/stats";
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
-function motionDelay(reduceMotion: boolean | null, ms: number) {
-  return reduceMotion ? 0 : ms / 1000;
-}
-
 export function Hero() {
-  const reduceMotion = useReducedMotion();
-
   return (
     <section
       id="hero"
       className="flex flex-col justify-center gap-10 py-16 md:min-h-[calc(100dvh-3.5rem)] md:py-24"
     >
       <div className="flex flex-col gap-6">
-        <motion.p
-          className="section-label"
-          initial={reduceMotion ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
+        <p
+          className="section-label hero-fade-in"
+          style={{ animationDuration: "0.4s", animationDelay: "0ms" }}
         >
           01 / Kent Bryan Colina
-        </motion.p>
+        </p>
 
-        <h1
-          className="max-w-3xl font-display text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl"
-        >
+        <h1 className="max-w-3xl font-display text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
           Full-Stack Developer
           <br />
           &amp; AI Engineer.
         </h1>
 
-        <motion.p
-          className="flex max-w-2xl flex-col gap-3 text-lg text-muted-foreground"
-          initial={reduceMotion ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{
-            duration: 0.4,
-            delay: motionDelay(reduceMotion, 200),
-            ease: "easeOut",
-          }}
+        <p
+          className="hero-fade-in flex max-w-2xl flex-col gap-3 text-lg text-muted-foreground"
+          style={{ animationDuration: "0.4s", animationDelay: "0.2s" }}
         >
           <span>
             I build full-stack products and agentic AI systems - and I care how
@@ -60,39 +41,28 @@ export function Hero() {
             Right now I&apos;m deep in multi-agent pipelines and document
             intelligence, and I like being tested on it.
           </span>
-        </motion.p>
+        </p>
       </div>
 
-      <motion.div
-        className="h-px w-full origin-left bg-border"
-        initial={reduceMotion ? false : { scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{
-          duration: 0.5,
-          delay: motionDelay(reduceMotion, 300),
-          ease: "easeOut",
-        }}
+      <div
+        className="hero-scale-x h-px w-full bg-border"
+        style={{ animationDuration: "0.5s", animationDelay: "0.3s" }}
         aria-hidden="true"
       />
 
-      <motion.div
-        className="flex flex-col gap-4"
-        initial={reduceMotion ? false : { opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: motionDelay(reduceMotion, 400) }}
+      <div
+        className="hero-fade-in flex flex-col gap-4"
+        style={{ animationDuration: "0.4s", animationDelay: "0.4s" }}
       >
-        <p className="section-label !mb-0">Proven under pressure</p>
+        <p className="section-label mb-0!">Proven under pressure</p>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
           {heroStats.map((stat, index) => (
-            <motion.div
+            <div
               key={stat.label}
-              className="flex flex-col gap-1"
-              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.45,
-                delay: motionDelay(reduceMotion, 400 + index * 80),
-                ease: "easeOut",
+              className="hero-fade-in-up flex flex-col gap-1"
+              style={{
+                animationDuration: "0.45s",
+                animationDelay: `${0.4 + index * 0.08}s`,
               }}
             >
               <span className="font-mono text-sm font-medium text-accent-ai">
@@ -101,32 +71,20 @@ export function Hero() {
               <span className="font-mono text-xs text-muted-foreground">
                 {stat.label}
               </span>
-            </motion.div>
+            </div>
           ))}
         </div>
-      </motion.div>
+      </div>
 
-      <motion.div
-        className="h-px w-full origin-left bg-border"
-        initial={reduceMotion ? false : { scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{
-          duration: 0.5,
-          delay: motionDelay(reduceMotion, 300),
-          ease: "easeOut",
-        }}
+      <div
+        className="hero-scale-x h-px w-full bg-border"
+        style={{ animationDuration: "0.5s", animationDelay: "0.3s" }}
         aria-hidden="true"
       />
 
-      <motion.div
-        className="flex flex-wrap gap-3"
-        initial={reduceMotion ? false : { opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{
-          duration: 0.4,
-          delay: motionDelay(reduceMotion, 600),
-          ease: "easeOut",
-        }}
+      <div
+        className="hero-fade-in flex flex-wrap gap-3"
+        style={{ animationDuration: "0.4s", animationDelay: "0.6s" }}
       >
         <a
           href={siteConfig.links.github}
@@ -135,7 +93,7 @@ export function Hero() {
           className={cn(buttonVariants({ variant: "outline" }), "h-9 px-3")}
         >
           GitHub
-          <ArrowUpRight data-icon="inline-end" />
+          <ArrowUpRight data-icon="inline-end" aria-hidden="true" />
         </a>
         <a
           href={siteConfig.links.linkedin}
@@ -144,14 +102,14 @@ export function Hero() {
           className={cn(buttonVariants({ variant: "outline" }), "h-9 px-3")}
         >
           LinkedIn
-          <ArrowUpRight data-icon="inline-end" />
+          <ArrowUpRight data-icon="inline-end" aria-hidden="true" />
         </a>
         <a
           href={`mailto:${siteConfig.email}`}
           className={cn(buttonVariants({ variant: "outline" }), "h-9 px-3")}
         >
           Email
-          <Mail data-icon="inline-end" />
+          <Mail data-icon="inline-end" aria-hidden="true" />
         </a>
         <a
           href="/resume.pdf"
@@ -159,9 +117,9 @@ export function Hero() {
           className={cn(buttonVariants({ variant: "outline" }), "h-9 px-3")}
         >
           Resume
-          <Download data-icon="inline-end" />
+          <Download data-icon="inline-end" aria-hidden="true" />
         </a>
-      </motion.div>
+      </div>
     </section>
   );
 }

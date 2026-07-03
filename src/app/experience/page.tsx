@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import { ExperienceTimeline } from "@/components/experience/experience-timeline";
 import { experience } from "@/data/experience";
+import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Experience",
   description:
     "Production software experience, freelance client builds, and education history from Kent Colina.",
+  alternates: {
+    canonical: `${siteConfig.url}/experience`,
+  },
 };
 
 export default function ExperiencePage() {

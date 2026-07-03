@@ -8,11 +8,17 @@ const securityHeaders = [
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=()",
   },
-  { key: "X-XSS-Protection", value: "1; mode=block" },
 ];
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  experimental: {
+    optimizePackageImports: ["lucide-react", "motion/react"],
+  },
+  images: {
+    formats: ["image/avif", "image/webp"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+  },
   async headers() {
     return [
       {

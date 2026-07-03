@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { getProject, getProjects } from "@/lib/content";
+import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 type ProjectPageProps = {
@@ -27,6 +28,15 @@ export async function generateMetadata({ params }: ProjectPageProps) {
   return {
     title: project.title,
     description: project.description,
+    alternates: {
+      canonical: `${siteConfig.url}/projects/${slug}`,
+    },
+    openGraph: {
+      title: `${project.title} | ${siteConfig.name}`,
+      description: project.description,
+      url: `${siteConfig.url}/projects/${slug}`,
+      type: "article",
+    },
   };
 }
 

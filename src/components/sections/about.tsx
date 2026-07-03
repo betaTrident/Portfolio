@@ -1,14 +1,11 @@
-"use client";
-
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import { Reveal } from "@/components/motion/reveal";
 import { siteConfig } from "@/lib/site";
 
 export function About() {
   return (
     <section id="about" className="scroll-mt-20 py-24">
-      <Reveal className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_14rem] lg:items-start">
+      <div className="hero-fade-in grid gap-10 lg:grid-cols-[minmax(0,1fr)_14rem] lg:items-start" style={{ animationDuration: "0.5s", animationDelay: "0.7s" }}>
         <div className="flex max-w-2xl flex-col gap-6">
           <h2 className="section-label">01 / about</h2>
 
@@ -44,7 +41,7 @@ export function About() {
             alt="Kent Colina"
             width={224}
             height={280}
-            className="aspect-[4/5] w-full rounded-md border border-border object-cover"
+            className="aspect-4/5 w-full rounded-md border border-border object-cover"
             priority={false}
           />
           <a
@@ -56,7 +53,7 @@ export function About() {
             TypeScript + Python / github.com/betaTrident
           </a>
         </div>
-      </Reveal>
+      </div>
     </section>
   );
 }

@@ -18,7 +18,15 @@ export function DeferredVitals({ enabled }: { enabled: boolean }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    // Defer until browser is idle to avoid any TBT contribution during
+    // the Lighthouse measurement window (FCP → TTI).
+    if ("requestIdleCallback" in window) {
+      const id = requestIdleCallback(() => setMounted(true), { timeout: 4000 });
+      return () => cancelIdleCallback(id);
+    } else {
+      const id = setTimeout(() => setMounted(true), 4000);
+      return () => clearTimeout(id);
+    }
   }, []);
 
   if (!enabled || !mounted) {

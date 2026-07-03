@@ -1,10 +1,15 @@
+import type { Metadata } from "next";
 import { ProjectsFilter } from "@/components/projects/projects-filter";
 import { getProjects } from "@/lib/content";
+import { siteConfig } from "@/lib/site";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Projects",
   description:
     "AI systems, SaaS products, and client builds — case studies from Kent Colina.",
+  alternates: {
+    canonical: `${siteConfig.url}/projects`,
+  },
 };
 
 export default function ProjectsPage() {

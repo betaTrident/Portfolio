@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import { SkillsGrid } from "@/components/skills/skills-grid";
 import { skills } from "@/data/skills";
+import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Stack",
   description:
     "Kent Colina's stack across AI engineering, full-stack development, databases, infrastructure, and document intelligence.",
+  alternates: {
+    canonical: `${siteConfig.url}/stack`,
+  },
 };
 
 export default function StackPage() {

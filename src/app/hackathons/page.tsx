@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import { HackathonsList } from "@/components/hackathons/hackathons-list";
 import { hackathons } from "@/data/hackathons";
+import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Hackathons",
   description:
     "Kent Colina's AI hackathon track record, including finalist results, highlighted builds, and participant entries.",
+  alternates: {
+    canonical: `${siteConfig.url}/hackathons`,
+  },
 };
 
 export default function HackathonsPage() {

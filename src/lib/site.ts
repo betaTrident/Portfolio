@@ -3,7 +3,7 @@ export const siteConfig = {
   title: "Full-Stack Developer & AI Engineer",
   description:
     "Full-stack developer and AI engineer building agentic systems and typed production software. Top-64 of 1,920+ Reply AI teams.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://kentbryancolina.dev",
   email: "colinakb24@gmail.com",
   links: {
     github: "https://github.com/betaTrident",

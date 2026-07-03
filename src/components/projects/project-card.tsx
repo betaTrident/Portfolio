@@ -54,10 +54,11 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
           </div>
           <Link
             href={`/projects/${project.slug}`}
+            aria-label={`View ${project.title} case study`}
             className="group inline-flex w-fit items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-accent-ai"
           >
             case study
-            <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+            <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
           </Link>
         </CardContent>
       </Card>
