@@ -39,7 +39,7 @@ export function Sidebar() {
       <div className="mb-10 flex flex-col gap-1">
         <Link
           href="/"
-          className="font-display text-base font-semibold tracking-tight transition-colors hover:text-accent-ai focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          className="inline-flex min-h-6 items-center font-display text-base font-semibold tracking-tight transition-colors hover:text-accent-ai focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           {siteConfig.name}
         </Link>

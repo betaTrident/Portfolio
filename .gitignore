@@ -49,4 +49,8 @@ next-env.d.ts
 
 # local QA artifacts
 .phase7-artifacts/
+.lighthouseci/
 .next-*.log
+
+.vercel
+.env*

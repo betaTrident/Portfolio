@@ -79,7 +79,7 @@ export function SidebarNav() {
               href={sectionHref(item.id, isHome)}
               aria-current={active ? "true" : undefined}
               className={cn(
-                "group relative flex items-center gap-3 py-1.5 font-mono text-[13px] text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                "group relative flex min-h-6 items-center gap-3 py-1 font-mono text-[13px] text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                 active && "text-accent-ai"
               )}
             >
@@ -109,7 +109,7 @@ export function SidebarNav() {
               href={item.href}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "py-1.5 font-mono text-[13px] text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                "flex min-h-6 items-center py-1 font-mono text-[13px] text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                 active && "text-accent-ai"
               )}
             >

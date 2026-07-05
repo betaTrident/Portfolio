@@ -1,0 +1,87 @@
+name: Vercel Production
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: vercel-production-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: "24"
+  VERCEL_CLI_VERSION: "54.20.1"
+  NEXT_TELEMETRY_DISABLED: "1"
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  VERCEL_SCOPE: ${{ secrets.VERCEL_SCOPE }}
+
+jobs:
+  verify-and-deploy:
+    name: Verify and deploy production
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build Next.js app
+        run: npm run build
+
+      - name: Lighthouse CI
+        run: npm run lhci
+
+      - name: Clean local build output before Vercel deploy
+        run: rm -rf .next .vercel/output
+
+      - name: Pull Vercel production environment
+        run: |
+          if [ -n "${VERCEL_SCOPE}" ]; then
+            npx vercel@${VERCEL_CLI_VERSION} pull --yes --environment=production --token="${VERCEL_TOKEN}" --scope="${VERCEL_SCOPE}"
+          else
+            npx vercel@${VERCEL_CLI_VERSION} pull --yes --environment=production --token="${VERCEL_TOKEN}"
+          fi
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy source to Vercel production
+        id: deploy
+        run: |
+          if [ -n "${VERCEL_SCOPE}" ]; then
+            DEPLOYMENT_URL="$(npx vercel@${VERCEL_CLI_VERSION} deploy --prod --yes --token="${VERCEL_TOKEN}" --scope="${VERCEL_SCOPE}")"
+          else
+            DEPLOYMENT_URL="$(npx vercel@${VERCEL_CLI_VERSION} deploy --prod --yes --token="${VERCEL_TOKEN}")"
+          fi
+          echo "deployment_url=${DEPLOYMENT_URL}" >> "$GITHUB_OUTPUT"
+          echo "Deployed ${GITHUB_SHA} to ${DEPLOYMENT_URL}"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deployment summary
+        run: |
+          {
+            echo "## Vercel Production Deployment"
+            echo ""
+            echo "- Commit: \`${GITHUB_SHA}\`"
+            echo "- Deployment: ${{ steps.deploy.outputs.deployment_url }}"
+            echo "- Target: production"
+            echo "- Lighthouse gate: strict 100 category scores on configured routes"
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -26,7 +26,7 @@ export default function ExperiencePage() {
         </p>
       </div>
 
-      <ExperienceTimeline entries={experience} />
+      <ExperienceTimeline entries={experience} headingLevel="h2" />
     </div>
   );
 }

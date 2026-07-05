@@ -25,7 +25,11 @@ export default function HackathonsPage() {
         </p>
       </div>
 
-      <HackathonsList entries={hackathons} includeParticipants />
+      <HackathonsList
+        entries={hackathons}
+        includeParticipants
+        headingLevel="h2"
+      />
     </div>
   );
 }

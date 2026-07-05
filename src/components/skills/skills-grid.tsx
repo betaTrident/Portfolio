@@ -8,10 +8,15 @@ import { fadeUp, staggerContainer } from "@/lib/motion";
 
 type SkillsGridProps = {
   categories: SkillCategory[];
+  headingLevel?: "h2" | "h3";
 };
 
-export function SkillsGrid({ categories }: SkillsGridProps) {
+export function SkillsGrid({
+  categories,
+  headingLevel = "h3",
+}: SkillsGridProps) {
   const reduceMotion = useReducedMotion();
+  const Heading = headingLevel;
 
   return (
     <motion.div
@@ -26,9 +31,9 @@ export function SkillsGrid({ categories }: SkillsGridProps) {
           <Card className="h-full">
             <CardContent className="flex flex-col gap-4 pt-6">
               <div className="flex flex-col gap-2">
-                <h3 className="font-display text-base font-semibold tracking-tight">
+                <Heading className="font-display text-base font-semibold tracking-tight">
                   {category.name}
-                </h3>
+                </Heading>
                 <p className="text-sm text-muted-foreground">
                   {category.description}
                 </p>

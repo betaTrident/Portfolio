@@ -7,7 +7,10 @@
     "dev:turbo": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "start:ci": "next start --hostname 127.0.0.1 --port 3010",
+    "lint": "eslint",
+    "ci:verify": "npm run lint && npm run build",
+    "lhci": "lhci autorun"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
@@ -40,6 +43,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@lhci/cli": "^0.15.1",
     "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.20",
     "@types/node": "^20",

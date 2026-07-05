@@ -26,7 +26,7 @@ export default function StackPage() {
         </p>
       </div>
 
-      <SkillsGrid categories={skills} />
+      <SkillsGrid categories={skills} headingLevel="h2" />
     </div>
   );
 }

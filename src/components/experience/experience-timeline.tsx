@@ -10,11 +10,17 @@ import { cn } from "@/lib/utils";
 type ExperienceTimelineProps = {
   entries: ExperienceEntry[];
   limit?: number;
+  headingLevel?: "h2" | "h3";
 };
 
-export function ExperienceTimeline({ entries, limit }: ExperienceTimelineProps) {
+export function ExperienceTimeline({
+  entries,
+  limit,
+  headingLevel = "h3",
+}: ExperienceTimelineProps) {
   const reduceMotion = useReducedMotion();
   const visibleEntries = limit ? entries.slice(0, limit) : entries;
+  const Heading = headingLevel;
 
   return (
     <div className="flex flex-col">
@@ -49,9 +55,9 @@ export function ExperienceTimeline({ entries, limit }: ExperienceTimelineProps) 
             <div className="flex flex-col gap-3">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div className="flex flex-col gap-1">
-                  <h3 className="font-display text-lg font-semibold tracking-tight">
+                  <Heading className="font-display text-lg font-semibold tracking-tight">
                     {entry.role}
-                  </h3>
+                  </Heading>
                   <p className="text-sm text-muted-foreground">
                     {entry.company}
                   </p>

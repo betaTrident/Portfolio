@@ -40,12 +40,13 @@ export function About() {
 
         <div className="hidden flex-col gap-3 lg:flex">
           <Image
-            src="/colinaPortrait.jpg"
+            src="/colinaAvatar.webp"
             alt="Kent Colina"
             width={224}
             height={280}
+            sizes="224px"
             className="aspect-4/5 w-full rounded-md border border-border object-cover"
-            priority={false}
+            priority
           />
           <div className="flex flex-col gap-2">
           

@@ -10,6 +10,7 @@ import { fadeUp } from "@/lib/motion";
 type HackathonsListProps = {
   entries: Hackathon[];
   includeParticipants?: boolean;
+  headingLevel?: "h2" | "h3";
 };
 
 function VerifyLink({ href }: { href?: string }) {
@@ -33,11 +34,14 @@ function VerifyLink({ href }: { href?: string }) {
 function HighlightCard({
   entry,
   index,
+  headingLevel,
 }: {
   entry: Hackathon;
   index: number;
+  headingLevel: "h2" | "h3";
 }) {
   const reduceMotion = useReducedMotion();
+  const Heading = headingLevel;
 
   return (
     <motion.div
@@ -59,9 +63,9 @@ function HighlightCard({
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-            <h3 className="font-display text-xl font-semibold tracking-tight sm:text-2xl">
+            <Heading className="font-display text-xl font-semibold tracking-tight sm:text-2xl">
               {entry.name}
-            </h3>
+            </Heading>
             <VerifyLink href={entry.href} />
           </div>
 
@@ -120,6 +124,7 @@ function ParticipantRow({ entry }: { entry: Hackathon }) {
 export function HackathonsList({
   entries,
   includeParticipants = false,
+  headingLevel = "h3",
 }: HackathonsListProps) {
   const reduceMotion = useReducedMotion();
   const highlighted = entries.filter((entry) => entry.highlight);
@@ -129,7 +134,12 @@ export function HackathonsList({
     <>
       <div className="flex flex-col gap-6">
         {highlighted.map((entry, index) => (
-          <HighlightCard key={entry.name} entry={entry} index={index} />
+          <HighlightCard
+            key={entry.name}
+            entry={entry}
+            index={index}
+            headingLevel={headingLevel}
+          />
         ))}
       </div>
 
