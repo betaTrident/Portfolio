@@ -141,7 +141,7 @@ Add a single intro sentence under each section label (`text-sm text-muted-foregr
 |---|---|
 | Projects | "AI systems, SaaS products, and client builds — ranked and shipped, not just prototyped." |
 | Hackathons | "Competing against thousands of teams to stress-test what I build." |
-| Experience | "Shipping production software at Symph while competing in global AI hackathons on the side." |
+| Experience | "Shipping production software at Symph while competing in global AI hackathons on the sidelines." |
 | Skills | "The tools I reach for across AI engineering, full-stack development, and infrastructure." |
 | Contact | *(keep as-is — "Let's build something." already serves this purpose)* |
 

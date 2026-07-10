@@ -4,6 +4,7 @@ import {
   Mail,
 } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
+import { TextHighlighter } from "@/components/ui/text-highlighter";
 import { heroStats } from "@/data/stats";
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -12,14 +13,14 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="flex flex-col justify-center gap-10 py-16 md:min-h-[calc(100dvh-3.5rem)] md:py-24"
+      className="flex flex-col justify-center gap-8 py-14 md:min-h-[calc(100dvh-3.5rem)] md:py-20"
     >
       <div className="flex flex-col gap-6">
         <p
           className="section-label hero-fade-in"
           style={{ animationDuration: "0.4s", animationDelay: "0ms" }}
         >
-          01 / Kent Bryan Colina
+          01 / <TextHighlighter>Kent Bryan Colina</TextHighlighter>
         </p>
 
         <h1 className="max-w-3xl font-display text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
@@ -38,8 +39,8 @@ export function Hero() {
             enough that nobody thinks about it.
           </span>
           <span className="text-base text-muted-foreground/80">
-            Right now I&apos;m deep in multi-agent pipelines and document
-            intelligence, and I like being tested on it.
+            Lately, I&apos;ve been exploring multi-agent pipelines and document
+            intelligence, turning what I learn into practical, reliable tools.
           </span>
         </p>
       </div>

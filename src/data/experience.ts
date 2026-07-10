@@ -15,7 +15,7 @@ export const experience: ExperienceEntry[] = [
     location: "Cebu City, Philippines",
     type: "work",
     bullets: [
-      "Contributed to Peaksy (web + mobile) and CourtHub as part of a small team, alongside a co-intern and a senior developer.",
+      "Contributed to Peaksy (web + mobile) and CourtHub as part of a small team, alongside my co-interns and a senior developer.",
       "Built and improved full-stack features across auth, profiles, search, bookings, payments, and chat workflows.",
     ],
   },

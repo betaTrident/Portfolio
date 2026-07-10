@@ -5,8 +5,8 @@ import { experience } from "@/data/experience";
 
 export function Experience() {
   return (
-    <section id="experience" className="scroll-mt-20 py-24">
-      <div className="mb-10 flex flex-col gap-3">
+    <section id="experience" className="scroll-mt-20 py-20">
+      <div className="mb-8 flex flex-col gap-3">
         <div className="flex items-end justify-between gap-4">
           <h2 className="section-label">04 / experience</h2>
           <Link
@@ -17,9 +17,8 @@ export function Experience() {
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
-        <p className="max-w-2xl text-sm text-muted-foreground">
-          Shipping production software at Symph while competing in global AI
-          hackathons on the side.
+        <p className="text-sm text-muted-foreground">
+          Shipping production software at Symph while competing in global AI hackathons on the sidelines.
         </p>
       </div>
 

@@ -5,21 +5,21 @@ import { siteConfig } from "@/lib/site";
 
 export function About() {
   return (
-    <section id="about" className="scroll-mt-20 py-24">
+    <section id="about" className="scroll-mt-20 py-20">
       <div className="hero-fade-in grid gap-10 lg:grid-cols-[minmax(0,1fr)_14rem] lg:items-start" style={{ animationDuration: "0.5s", animationDelay: "0.7s" }}>
         <div className="flex max-w-2xl flex-col gap-6">
-          <h2 className="section-label">01 / about</h2>
+          <h2 className="section-label">01 / about me</h2>
 
           <div className="flex flex-col gap-4 text-lg leading-relaxed text-muted-foreground">
             <p>
-              I&apos;m a full-stack developer and AI engineer. Most of my work
-              lives in three places: production software with real users -
-              I helped build Peaksy and CourtHub as part of a small internship
-              team at Symph, alongside a co-intern and a senior developer;
-              point-of-sale systems I built solo for local businesses; and
-              agentic AI, where I&apos;ve ranked top-64 of 1,920+ teams in the
-              Reply AI Agent Challenge and reached the finals of two other
-              global hackathons.
+              I&apos;m the kind of developer who gets hooked on an idea and wants
+              to build it immediately. These days, most of those ideas involve
+              AI agents, automation, and better ways to turn repetitive work
+              into simple systems. I experiment with AI every day, and it has
+              completely changed how productively I learn, solve problems, and
+              ship software. I also enjoy the pressure of hackathons, it helps me
+              express my ideas and learn from the experience as well, along with football and billiards
+              whenever I&apos;m away from the screen.
             </p>
             <p>
               What ties it together is how I build: small, legible systems,

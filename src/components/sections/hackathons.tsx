@@ -5,8 +5,8 @@ import { hackathons } from "@/data/hackathons";
 
 export function Hackathons() {
   return (
-    <section id="hackathons" className="scroll-mt-20 py-24">
-      <div className="mb-10 flex flex-col gap-3">
+    <section id="hackathons" className="scroll-mt-20 py-20">
+      <div className="mb-8 flex flex-col gap-3">
         <div className="flex items-end justify-between gap-4">
           <h2 className="section-label">03 / hackathons</h2>
           <Link

@@ -11,7 +11,7 @@ export function Contact() {
   const { copied, copy } = useClipboard(2000);
 
   return (
-    <section id="contact" className="scroll-mt-20 py-24">
+    <section id="contact" className="scroll-mt-20 py-20">
       <Reveal className="flex max-w-2xl flex-col gap-6">
         <h2 className="section-label">06 / contact</h2>
 

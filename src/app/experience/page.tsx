@@ -20,9 +20,8 @@ export default function ExperiencePage() {
         <h1 className="font-display text-3xl font-semibold tracking-tight">
           Experience
         </h1>
-        <p className="max-w-2xl text-muted-foreground">
-          Shipping production software at Symph while competing in global AI
-          hackathons on the side.
+        <p className="text-muted-foreground">
+          Shipping production software at Symph while competing in global AI hackathons on the sidelines.
         </p>
       </div>
 

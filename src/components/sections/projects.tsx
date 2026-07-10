@@ -7,8 +7,8 @@ export function Projects() {
   const projects = getFeaturedProjects();
 
   return (
-    <section id="projects" className="scroll-mt-20 py-24">
-      <div className="mb-10 flex flex-col gap-3">
+    <section id="projects" className="scroll-mt-20 py-20">
+      <div className="mb-8 flex flex-col gap-3">
         <div className="flex items-end justify-between gap-4">
           <h2 className="section-label">02 / projects</h2>
           <Link
