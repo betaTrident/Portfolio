@@ -36,7 +36,7 @@ export const hackathons: Hackathon[] = [
     result: "Finalist",
     resultLabel: "",
     description:
-      "Document intelligence platform — contracts and scanned logistics papers into structured datasets via OCR + LLM extraction.",
+      "Multi-agent document intelligence platform — contracts and scanned logistics papers into structured datasets via OCR + LLM extraction.",
     tags: ["FastAPI", "PaddleOCR", "Ollama", "Next.js", "Docker"],
     highlight: true,
   },
